@@ -1,8 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:randomized_restaurant/screens/browse_screen.dart';
+import 'package:randomized_restaurant/screens/favorites_screen.dart';
+import 'package:randomized_restaurant/screens/user_profile_screen.dart';
 import 'package:randomized_restaurant/theme/theme.dart';
 import 'package:randomized_restaurant/theme/util.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:randomized_restaurant/widgets/app_nav_bar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:randomized_restaurant/screens/result_screen.dart';
+
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+final _router = GoRouter(
+  routes: [
+    ShellRoute(
+      navigatorKey: _rootNavigatorKey,
+      builder: (context, state, child) =>
+          Scaffold(body: child, bottomNavigationBar: AppNavBar()),
+      routes: [
+        GoRoute(path: '/', builder: (context, state) => HomeScreen()),
+        GoRoute(path: '/result', builder: (context, state) => ResultScreen()),
+        GoRoute(
+          path: '/userProfile',
+          builder: (context, state) => UserProfileScreen(),
+        ),
+        GoRoute(
+          path: '/favorites',
+          builder: (context, state) => FavoritesScreen(),
+        ),
+        GoRoute(path: '/browse', builder: (context, state) => BrowseScreen()),
+      ],
+    ),
+  ],
+);
 
 void main() {
   runApp(const MyApp());
@@ -14,15 +43,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // final brightness = View.of(context).platformDispatcher.platformBrightness;
+    final brightness = View.of(context).platformDispatcher.platformBrightness;
     TextTheme textTheme = createTextTheme(context, 'Lato', 'Inter');
     MaterialTheme theme = MaterialTheme(textTheme);
 
-    return MaterialApp(
+    // Note
+    return MaterialApp.router(
+      routerConfig: _router,
       title: 'Flutter Demo',
-      // theme: brightness == Brightness.light ? theme.light() : theme.dark(),
-      theme: theme.lightMediumContrast(),
-      home: const HomeScreen(),
+      theme: brightness == Brightness.light
+          ? theme.lightMediumContrast()
+          : theme.lightMediumContrast(),
+      // theme: theme.lightMediumContrast(),
     );
   }
 }
@@ -35,13 +67,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Center(child: const Text('Restaurant Randomizer'))),
       body: Center(child: RandomizeButton()),
-      bottomNavigationBar: AppNavBar(indexValue: 0),
     );
   }
 }
 
 class RandomizeButton extends StatelessWidget {
-  RandomizeButton({super.key});
+  const RandomizeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
