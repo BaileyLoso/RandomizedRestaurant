@@ -69,7 +69,7 @@ class _AppNavBarState extends State<AppNavBar> {
               context.go('/');
               break;
             case 1:
-              context.go('/browse');
+              context.go('/result');
               break;
             case 2:
               context.go('/favorites');

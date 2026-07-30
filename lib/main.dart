@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/screens/browse_screen.dart';
-import 'package:randomized_restaurant/screens/favorites_screen.dart';
-import 'package:randomized_restaurant/screens/user_profile_screen.dart';
-import 'package:randomized_restaurant/theme/theme.dart';
-import 'package:randomized_restaurant/theme/util.dart';
+import 'package:randomized_restaurant/ui/screens/browse_screen.dart';
+import 'package:randomized_restaurant/ui/screens/favorites_screen.dart';
+import 'package:randomized_restaurant/ui/screens/home_screen.dart';
+import 'package:randomized_restaurant/ui/screens/user_profile_screen.dart';
+import 'package:randomized_restaurant/ui/core/theme/theme.dart';
+import 'package:randomized_restaurant/ui/core/theme/util.dart';
 import 'package:randomized_restaurant/widgets/app_nav_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:randomized_restaurant/screens/result_screen.dart';
+import 'package:randomized_restaurant/ui/screens/result_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -55,18 +56,6 @@ class MyApp extends StatelessWidget {
           ? theme.lightMediumContrast()
           : theme.lightMediumContrast(),
       // theme: theme.lightMediumContrast(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Center(child: const Text('Restaurant Randomizer'))),
-      body: Center(child: RandomizeButton()),
     );
   }
 }
