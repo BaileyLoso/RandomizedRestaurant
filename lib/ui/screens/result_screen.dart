@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:randomized_restaurant/widgets/result_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -9,17 +10,10 @@ class ResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Result')),
       body: Skeletonizer(
+        enabled: true,
         child: ListView.builder(
           itemBuilder: (context, index) {
-
-            // TODO: Replace Card with actual result 
-            return Card(
-              child: ListTile(
-                title: Text('Item number $index as title'),
-                subtitle: const Text('subtitle here'),
-                trailing: const Icon(Icons.star),
-              ),
-            );
+            return ResultView();
           },
           itemCount: 1,
         ),
