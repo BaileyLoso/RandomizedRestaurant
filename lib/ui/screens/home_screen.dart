@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/main.dart';
 import 'package:randomized_restaurant/widgets/randomize_button.dart';
 
 class HomeScreen extends StatelessWidget {
