@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/widgets/result_view.dart';
+import 'package:randomized_restaurant/widgets/restaurant_card_view.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
@@ -8,7 +8,7 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Result')),
-      body: Align(alignment: Alignment.topCenter, child: ResultView()),
+      body: Align(alignment: Alignment.topCenter, child: RestaurantCardView()),
     );
   }
 }
