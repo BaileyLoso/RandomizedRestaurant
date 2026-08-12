@@ -66,16 +66,16 @@ class _AppNavBarState extends State<AppNavBar> {
           });
           switch (index) {
             case 0:
-              context.go('/');
+              context.goNamed('home');
               break;
             case 1:
-              context.go('/browse');
+              context.go('browse');
               break;
             case 2:
-              context.go('/favorites');
+              context.go('favorites');
               break;
             case 3:
-              context.go('/userProfile');
+              context.go('userProfile');
               break;
           }
         },

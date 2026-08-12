@@ -7,11 +7,13 @@ import 'package:randomized_restaurant/ui/screens/home_screen.dart';
 import 'package:randomized_restaurant/ui/screens/user_profile_screen.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/core/theme/util.dart';
-import 'package:randomized_restaurant/widgets/app_nav_bar.dart';
+import 'package:randomized_restaurant/ui/core/shared_widgets/app_nav_bar.dart';
 import 'package:randomized_restaurant/ui/screens/result_screen.dart';
+import 'package:randomized_restaurant/routing/routes.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
+final routes = Routes().routes;
 final _router = GoRouter(
   routes: [
     ShellRoute(
@@ -19,19 +21,34 @@ final _router = GoRouter(
       builder: (context, state, child) =>
           Scaffold(body: child, bottomNavigationBar: AppNavBar()),
       routes: [
-        GoRoute(path: '/', builder: (context, state) => HomeScreen()),
-        GoRoute(path: '/result', builder: (context, state) => ResultScreen()),
+        GoRoute(
+          path: '/',
+          name: 'home',
+          builder: (context, state) => HomeScreen(),
+        ),
+        GoRoute(
+          path: '/result',
+          name: 'result',
+          builder: (context, state) => ResultScreen(),
+        ),
         GoRoute(
           path: '/userProfile',
+          name: 'userProfile',
           builder: (context, state) => UserProfileScreen(),
         ),
         GoRoute(
           path: '/favorites',
+          name: 'favorites',
           builder: (context, state) => FavoritesScreen(),
         ),
-        GoRoute(path: '/browse', builder: (context, state) => BrowseScreen()),
+        GoRoute(
+          path: '/browse',
+          name: 'browse',
+          builder: (context, state) => BrowseScreen(),
+        ),
       ],
     ),
+    ...routes,
   ],
 );
 
