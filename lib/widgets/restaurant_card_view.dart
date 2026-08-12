@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 
 class RestaurantCardView extends StatefulWidget {
@@ -21,6 +22,10 @@ class _RestaurantCardViewState extends State<RestaurantCardView> {
           child: Column(
             children: [
               GestureDetector(
+                onTap: () => context.pushNamed(
+                  "restaurantDetails",
+                  pathParameters: {'id': "4"},
+                ),
                 child: Stack(
                   children: [
                     Container(
