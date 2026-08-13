@@ -1,3 +1,4 @@
 {
-  "cmake.sourceDirectory": "/Users/bailey/VS Code Project Folders/randomized_restaurant/linux"
+  "cmake.sourceDirectory": "C:/CS Project Folders/random_restaurant/randomized_restaurant/windows",
+  "java.compile.nullAnalysis.mode": "automatic"
 }
