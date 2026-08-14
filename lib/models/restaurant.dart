@@ -7,63 +7,80 @@ enum PriceLevel {
   veryExpensive,
 }
 
-/// A collection of possible boolean "atmosphere" attributes that may be given
-/// to a restaurant.
-///
-/// TODO: Figure out a more efficient way to manage the remaining atmosphere values.
+/// A bit representation of the possible atmosphere tags assignable to a
+/// [Restaurant].
+enum AtmosphereFlag {
+  takeout(bit: 1 << 1, label: 'Takeout'),
+  delivery(bit: 1 << 2, label: 'Delivery'),
+  dineIn(bit: 1 << 3, label: 'Dine In'),
+  reservable(bit: 1 << 4, label: 'Reservable'),
+  goodForGroups(bit: 1 << 5, label: 'Good for Groups'),
+  outdoorSeating(bit: 1 << 6, label: 'Outdoor Seating'),
+  liveMusic(bit: 1 << 7, label: 'Live Music'),
+  allowsDogs(bit: 1 << 8, label: 'Allows Dogs'),
+  goodForChildren(bit: 1 << 9, label: 'Good For Children'),
+  servesVegetarianFood(bit: 1 << 10, label: 'Serves Vegetarian Food'),
+  servesBreakfast(bit: 1 << 11, label: 'Serves Breakfast'),
+  servesLunch(bit: 1 << 12, label: 'Serves Lunch'),
+  servesBrunch(bit: 1 << 13, label: 'Serves Brunch'),
+  servesDinner(bit: 1 << 14, label: 'Serves Dinner'),
+  servesCoffee(bit: 1 << 15, label: 'Serves Coffee'),
+  servesDessert(bit: 1 << 16, label: 'Serves Dessert'),
+  servesCocktails(bit: 1 << 17, label: 'Serves Cocktails'),
+  servesWine(bit: 1 << 18, label: 'Serves Wine'),
+  servesBeer(bit: 1 << 19, label: 'Serves Beer');
+
+  const AtmosphereFlag({required this.bit, required this.label});
+
+  final int bit;
+  final String label;
+}
+
+/// A bitmask representation of the different "atmosphere" tags used by the Google
+/// Places API.
 class Atmosphere {
-  final bool? goodForGroups;
-  final bool? allowsDogs;
-  final bool? reservable;
-  final bool? servesBeer;
-  final bool? servesWine;
-  final bool? servesVegetarianFood;
-  final bool? outdoorSeating;
+  final int _mask;
+  const Atmosphere(this._mask);
 
-  const Atmosphere({
-    this.goodForGroups = false,
-    this.allowsDogs = false,
-    this.reservable = false,
-    this.servesBeer = false,
-    this.servesWine = false,
-    this.servesVegetarianFood = false,
-    this.outdoorSeating = false,
-  });
+  /// Returns the active atmosphere flags represented by the current bitmask.
+  List<AtmosphereFlag> get activeFlags => AtmosphereFlag.values
+      .where((AtmosphereFlag flag) => (_mask & flag.bit) != 0)
+      .toList();
 
-  /// Creates an Atmosphere instance with values based on json input.
-  /// If the associated value is not present in the json object, it will
-  /// default to false.
+  /// Builds an [Atmosphere] from the Google Places API JSON response.
   factory Atmosphere.fromPlacesApiJson(Map<String, dynamic> json) {
-    return Atmosphere(
-      goodForGroups: json['goodForGroups'] as bool? ?? false,
-      allowsDogs: json['allowsDogs'] as bool? ?? false,
-      reservable: json['reservable'] as bool? ?? false,
-      servesBeer: json['servesBeer'] as bool? ?? false,
-      servesWine: json['servesWine'] as bool? ?? false,
-      servesVegetarianFood: json['servesVegetarianFood'] as bool? ?? false,
-      outdoorSeating: json['outdoorSeating'] as bool? ?? false,
-    );
+    int mask = 0;
+    for (final flag in AtmosphereFlag.values) {
+      if (json[flag.name] == true) {
+        mask |= flag.bit;
+      }
+    }
+    return Atmosphere(mask);
+  }
+
+  @override
+  String toString() {
+    return '''
+      $_mask
+      $activeFlags
+      ''';
   }
 }
 
-//TODO: Finish writing out description for Restaurant class
 /// An instance of a restaurant.
 class Restaurant {
   final String id; // Google Places API places_id
   final String name;
   final String address;
   final ({double latitude, double longitude}) location;
-
   final List<String> categoryTypes; // e.g., ['sports_bar', 'cat_cafe']
   final double? rating;
   final int? userRatingCount;
   final PriceLevel priceLevel;
-
   final String? summary;
   final String? websiteUri;
   final String? phoneNumber;
-
-  final Atmosphere atmosphereValues;
+  final List<AtmosphereFlag> atmosphereFlags;
 
   /// Stores the names of photos associated with a particular [Restaurant].
   ///
@@ -86,14 +103,15 @@ class Restaurant {
     this.summary,
     this.websiteUri,
     this.phoneNumber,
-    this.atmosphereValues = const Atmosphere(),
+    this.atmosphereFlags = const [],
     this.photoNames = const [],
     required this.cachedAt,
   });
 
   factory Restaurant.fromPlacesApiJson(Map<String, dynamic> json) {
     String? editorialSummary = json['editorialSummary']?['text'] as String?;
-    String? generativeSummary = json['generativeSummary']?['text'] as String?;
+    String? generativeSummary =
+        json['generativeSummary']?['overview']?['text'] as String?;
     var summaryRecord = (editorialSummary, generativeSummary);
 
     return Restaurant(
@@ -115,7 +133,7 @@ class Restaurant {
         _ => '',
       },
       websiteUri: json['websiteUri'] as String? ?? '',
-      atmosphereValues: Atmosphere.fromPlacesApiJson(json),
+      atmosphereFlags: Atmosphere.fromPlacesApiJson(json).activeFlags,
       phoneNumber: json['phoneNumber'] as String? ?? '',
       photoNames:
           (json['photos'] as List<dynamic>?)
@@ -157,6 +175,21 @@ class Restaurant {
 
   @override
   String toString() {
-    return '$name: $id';
+    return '''
+      Name: $name
+      Id: $id
+      Address: $address
+      Location: $location
+      Categories: $categoryTypes
+      Rating: $rating
+      User Rating Count: $userRatingCount
+      Price Level: $priceLevel
+      Summary: "$summary"
+      Website: $websiteUri
+      Phone Number: $phoneNumber
+      Atmophere Flags: $atmosphereFlags
+      Photo Names: $photoNames
+      Cached Time: $cachedAt
+    ''';
   }
 }
