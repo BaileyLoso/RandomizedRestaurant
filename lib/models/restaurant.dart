@@ -21,7 +21,7 @@ class Restaurant {
   final double? rating;
   final int? userRatingCount;
   final PriceLevel priceLevel;
-  final ({int startPrice, int endPrice})? priceRange;
+  final ({String startPrice, String endPrice})? priceRange;
   final String? summary;
   final String? websiteUri;
   final String? phoneNumber;
@@ -67,7 +67,7 @@ class Restaurant {
       address: json['formattedAddress'] as String? ?? '',
       location: (
         latitude: (json['location']?['latitude'] as num?)?.toDouble() ?? 0.0,
-        longitude: (json['location']?['latitude'] as num?)?.toDouble() ?? 0.0,
+        longitude: (json['location']?['longitude'] as num?)?.toDouble() ?? 0.0,
       ),
       operatingHours: OperatingHours.fromPlacesApiJson(json),
       categoryTypes: (json['types'] as List<String>?) ?? [],
@@ -76,19 +76,18 @@ class Restaurant {
       priceLevel: _parsePriceLevel(json['priceLevel'] as String? ?? ''),
       priceRange: (
         startPrice:
-            (json['priceRange']?['startPrice']?['units'] as num?)?.toInt() ?? 0,
-        endPrice:
-            (json['priceRange']?['endPrice']?['units'] as num?)?.toInt() ?? 0,
+            json['priceRange']?['startPrice']?['units'] as String? ?? '',
+        endPrice: json['priceRange']?['endPrice']?['units'] as String? ?? '',
       ),
       summary: switch (summaryRecord) {
         // Prefer to have the editorial summary over the generative summary
-        (String editorial, _) => editorial,
+        (String editorial, _) when editorial.isNotEmpty => editorial,
         (null || '', String generative) => generative,
         _ => '',
       },
       websiteUri: json['websiteUri'] as String? ?? '',
       atmosphereFlags: Atmosphere.fromPlacesApiJson(json).activeFlags,
-      phoneNumber: json['phoneNumber'] as String? ?? '',
+      phoneNumber: json['nationalPhoneNumber'] as String? ?? '',
       photoNames:
           (json['photos'] as List<dynamic>?)
               ?.map((photo) => photo['name'] as String)
