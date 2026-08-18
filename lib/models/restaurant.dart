@@ -18,6 +18,7 @@ class Restaurant {
   final ({double latitude, double longitude}) location;
   final OperatingHours operatingHours;
   final List<String> categoryTypes; // e.g., ['sports_bar', 'cat_cafe']
+  final String? primaryType;
   final double? rating;
   final int? userRatingCount;
   final PriceLevel priceLevel;
@@ -43,6 +44,7 @@ class Restaurant {
     required this.location,
     required this.operatingHours,
     required this.categoryTypes,
+    this.primaryType,
     this.rating,
     this.userRatingCount,
     this.priceLevel = PriceLevel.unspecified,
@@ -71,6 +73,7 @@ class Restaurant {
       ),
       operatingHours: OperatingHours.fromPlacesApiJson(json),
       categoryTypes: (json['types'] as List<String>?) ?? [],
+      primaryType: json['primaryType'] as String? ?? '',
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       userRatingCount: json['userRatingCount'] as int? ?? 0,
       priceLevel: _parsePriceLevel(json['priceLevel'] as String? ?? ''),
@@ -134,6 +137,7 @@ class Restaurant {
       Address: $address
       Location: $location
       Categories: $categoryTypes
+      Primary Type: $primaryType
       Rating: $rating
       User Rating Count: $userRatingCount
       Price Level: $priceLevel
