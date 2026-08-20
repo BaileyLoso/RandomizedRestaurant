@@ -15,12 +15,12 @@ class ApiClient {
   ) async {
     try {
       final response = await _client.postUri(
-        Uri.parse('$Env.baseUrl/data'),
+        Uri.parse(Env.baseUrl),
         options: Options(
           headers: {
             'Content-Type': 'application/json',
             'X-Goog-FieldMask':
-                'places.displayName,places.types,places.formattedAddress',
+                'places.id,places.displayName,places.types,places.formattedAddress',
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
@@ -30,8 +30,8 @@ class ApiClient {
           'locationRestriction': {
             'circle': {
               'center': {'latitude': lat, 'longitude': long},
+              'radius': radius,
             },
-            'radius': radius,
           },
         },
       );
