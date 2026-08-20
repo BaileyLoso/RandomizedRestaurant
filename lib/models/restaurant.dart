@@ -72,7 +72,7 @@ class Restaurant {
         longitude: (json['location']?['longitude'] as num?)?.toDouble() ?? 0.0,
       ),
       operatingHours: OperatingHours.fromPlacesApiJson(json),
-      categoryTypes: (json['types'] as List<String>?) ?? [],
+      categoryTypes: (json['types'] as List<dynamic>?)?.cast<String>() ?? [],
       primaryType: json['primaryType'] as String? ?? '',
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       userRatingCount: json['userRatingCount'] as int? ?? 0,
