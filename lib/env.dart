@@ -8,4 +8,7 @@ abstract class Env {
 
   @EnviedField(varName: 'BASE_URL')
   static final String baseUrl = _Env.baseUrl;
+
+  @EnviedField(varName: 'RESTAURANTS_URL')
+  static final String restaurantsUrl = _Env.restaurantsUrl;
 }
