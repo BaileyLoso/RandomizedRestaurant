@@ -4,7 +4,7 @@ class Photo {
 
   Photo({required this.name, required this.uri});
 
-  factory fromPhotoApi(Map<String, dynamic> json) {
+  factory fromPhotoJson(Map<String, String> json) {
     return Photo(name: json['name'] ?? '', uri: json['photoUri'] ?? '');
   }
 
