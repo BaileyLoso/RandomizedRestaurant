@@ -44,15 +44,19 @@ class ApiClient {
     }
   }
 
-  // TODO Replace default maximum values with a more precise value.
   Future<Photo?> fetchPhoto(String name) async {
     try {
       final response = await _client.get(
-        '{Env.baseUrl}$name/media',
+        '${Env.baseUrl}$name/media',
         options: Options(headers: {'Content-Type': 'application/json'}),
-        data: {'key': Env.apiKey, 'maxWidthPx': '8000', 'maxHeightPx': '8000'},
+        queryParameters: {
+          'key': Env.apiKey,
+          'maxWidthPx': '4800',
+          'maxHeightPx': '4800',
+          'skipHttpRedirect': 'true',
+        },
       );
-      return Photo.fromPhotoJson(response as Map<String, String>);
+      return Photo.fromPhotoJson(response.data as Map<String, String>);
     } catch (err) {
       print('API error: $err');
       return null;

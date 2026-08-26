@@ -6,11 +6,12 @@ class PhotoRepository {
   Map<String, DateTime> photoAccessTimes = {};
   final ApiClient _client = ApiClient();
 
-  Photo? photo(String name) {
+  Future<Photo?> photo(String name) async {
     if (photos[name] == null ||
-        DateTime.now().difference(photoAccessTimes[name]!).inDays < 1) {
+        DateTime.now().difference(photoAccessTimes[name]!).inDays >= 1) {
       photos.remove(name);
-      _requestPhoto(name);
+      photoAccessTimes.remove(name);
+      await _requestPhoto(name);
     }
     return photos[name];
   }
@@ -19,6 +20,7 @@ class PhotoRepository {
     var photo = await _client.fetchPhoto(photoName);
     if (photo != null) {
       photos[photoName] = photo;
+      photoAccessTimes[photoName] = DateTime.now();
     }
   }
 }
