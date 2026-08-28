@@ -28,16 +28,16 @@ class Restaurant {
   final String? phoneNumber;
   final List<AtmosphereFlag> atmosphereFlags;
 
+  /// The primary photo
+  ({String name, int width, int height})? photo;
+
   /// Stores the names of photos associated with a particular [Restaurant].
   ///
   /// NOTE: These are not image URIs, but rather strings that must be provided
   /// to a Place Photos API request.
-  final List<String> photoNames;
+  final List<({String name, int width, int height})> photos;
 
-  /// The time when a Restaurant's information is cached.
-  final DateTime cachedAt;
-
-  const Restaurant({
+  Restaurant({
     required this.id,
     required this.name,
     required this.address,
@@ -53,8 +53,8 @@ class Restaurant {
     this.websiteUri,
     this.phoneNumber,
     this.atmosphereFlags = const [],
-    this.photoNames = const [],
-    required this.cachedAt,
+
+    this.photos = const [],
   });
 
   factory Restaurant.fromPlacesApiJson(Map<String, dynamic> json) {
@@ -91,13 +91,31 @@ class Restaurant {
       websiteUri: json['websiteUri'] as String? ?? '',
       atmosphereFlags: Atmosphere.fromPlacesApiJson(json).activeFlags,
       phoneNumber: json['nationalPhoneNumber'] as String? ?? '',
-      photoNames:
+      photos:
           (json['photos'] as List<dynamic>?)
-              ?.map((photo) => photo['name'] as String)
+              ?.where(
+                (photo) =>
+                    photo['authorAttributions']?[0]?['displayName'] as String ==
+                        json['displayName']?['text'] as String &&
+                    (photo['widthPx'] as int? ?? 0) >= 360 &&
+                    (photo['heightPx'] as int? ?? 0) >= 180,
+              )
+              .map(
+                (photo) => (
+                  name: photo['name'] as String,
+                  width: photo['widthPx'] as int,
+                  height: photo['heightPx'] as int,
+                ),
+              )
               .toList() ??
           [],
-      cachedAt: DateTime.now(),
     );
+  }
+
+  ({String name, int width, int height})? get primaryPhoto => photo;
+
+  set primaryPhoto(({String name, int width, int height}) updatedPhoto) {
+    photo = updatedPhoto;
   }
 
   /// Returns the [PriceLevel] enum value from a string value.
@@ -145,8 +163,7 @@ class Restaurant {
       Website: $websiteUri
       Phone Number: $phoneNumber
       Atmophere Flags: $atmosphereFlags
-      Photo Names: $photoNames
-      Cached Time: $cachedAt
+      Photo Names: $photos
     ''';
   }
 }

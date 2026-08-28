@@ -1,11 +1,22 @@
 class Photo {
   final String name;
   final String uri;
+  int? maxWidth;
+  int? maxHeight;
 
-  Photo({required this.name, required this.uri});
+  Photo({required this.name, required this.uri, this.maxWidth, this.maxHeight});
 
-  factory fromPhotoJson(Map<String, String> json) {
-    return Photo(name: json['name'] ?? '', uri: json['photoUri'] ?? '');
+  factory fromPhotoJson(
+    Map<String, String> json, {
+    int? maxWidth,
+    int? maxHeight,
+  }) {
+    return Photo(
+      name: json['name'] ?? '',
+      uri: json['photoUri'] ?? '',
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+    );
   }
 
   @override
