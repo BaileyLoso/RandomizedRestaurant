@@ -9,23 +9,20 @@ class RestaurantRepository {
 
   RestaurantRepository();
 
-  // TODO fetch from *random* sections of a map
-  Future<List<Restaurant>>? fetchRestaurants({
+  Future<List<Restaurant>> fetchRestaurants({
     int radius = 5000,
     required double latitude,
     required double longitude,
-    int resultsCount = 20,
+    int pageSize = 20,
   }) async {
-    if (restaurants.isNotEmpty) {
-      restaurants.clear();
-    }
+    restaurants.clear();
     var r = await _client.fetchNearbyRestaurants(
       radius: radius,
       latitude: latitude,
       longitude: longitude,
       pageSize: 20,
     );
-    restaurants.addAll(r.map((restaurant) => restaurant).toList());
+    restaurants.addAll(r);
     if (restaurants.isNotEmpty) {
       restaurants.shuffle();
     }
@@ -39,8 +36,14 @@ class RestaurantRepository {
         _index = 0;
       }
       selectedRestaurant = restaurants[_index];
+      _index++;
       return selectedRestaurant;
     }
     return null;
+  }
+
+  @override
+  String toString() {
+    return restaurants.toString();
   }
 }
