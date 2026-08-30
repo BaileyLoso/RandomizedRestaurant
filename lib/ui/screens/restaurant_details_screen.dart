@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
