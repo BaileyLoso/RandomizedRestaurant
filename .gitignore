@@ -54,3 +54,5 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 .vscode/settings.json
 .env
 lib/env.g.dart
+# Widget Preview related
+.widget_preview/

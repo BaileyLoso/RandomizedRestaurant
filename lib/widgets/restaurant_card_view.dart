@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
+import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 
-class RestaurantCardView extends StatefulWidget {
+class RestaurantCardView extends ConsumerStatefulWidget {
   const RestaurantCardView({super.key});
 
   @override
-  State<RestaurantCardView> createState() => _RestaurantCardViewState();
+  ConsumerState<RestaurantCardView> createState() => _RestaurantCardViewState();
 }
 
-class _RestaurantCardViewState extends State<RestaurantCardView> {
+class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-
+    final results = ref.watch(resultViewModelProvider);
+    final restaurant = results.pickedRestaurant;
+    if (results.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (restaurant == null) {
+      return const Center(child: Text("No restaurants found"));
+    }
     return ListView(
       children: [
         Padding(
@@ -24,7 +33,7 @@ class _RestaurantCardViewState extends State<RestaurantCardView> {
               GestureDetector(
                 onTap: () => context.pushNamed(
                   "restaurantDetails",
-                  pathParameters: {'id': "4"},
+                  pathParameters: {'id': restaurant.id},
                 ),
                 child: Stack(
                   children: [
@@ -64,7 +73,7 @@ class _RestaurantCardViewState extends State<RestaurantCardView> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "John's Magical Restaurant Which Serves Food With Really Long Food Names",
+                  restaurant.name,
                   style: textTheme.headlineMedium?.copyWith(
                     color: theme.primary,
                   ),
@@ -75,12 +84,13 @@ class _RestaurantCardViewState extends State<RestaurantCardView> {
                 child: Row(
                   children: [
                     Text(
-                      "4.9",
+                      restaurant.rating.toString(),
                       style: textTheme.titleLarge?.copyWith(
                         color: theme.secondary,
                       ),
                     ),
                     Icon(Icons.star, color: MaterialTheme.ratingStar.value),
+                    Text('(${restaurant.userRatingCount})'),
                   ],
                 ),
               ),

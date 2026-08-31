@@ -1,28 +1,71 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 
 import 'package:randomized_restaurant/data/services/api/api_client.dart';
+import 'package:randomized_restaurant/env.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
 
+import '../fixtures/test_restaurants.dart';
+
 void main() {
-  test('Client can request API data', () async {
-    final client = ApiClient();
-    List<Restaurant> r = await client.fetchNearbyRestaurants(
+  late Dio dio;
+  late DioAdapter dioAdapter;
+  late ApiClient client;
+
+  setUp(() {
+    dio = Dio();
+    dioAdapter = DioAdapter(dio: dio);
+    client = ApiClient(dio: dio);
+  });
+
+  test('Client parses restaurants from a successful response', () async {
+    dioAdapter.onPost(
+      Env.restaurantsUrl,
+      (server) => server.reply(200, {
+        'places': [restaurantOne, restaurantTwo, restaurantThree],
+      }),
+      data: Matchers.any,
+    );
+
+    final List<Restaurant> result = await client.fetchNearbyRestaurants(
       radius: 1000,
       latitude: 45.02608885433202,
       longitude: -93.19208827866116,
       pageSize: 5,
     );
 
-    expect(r, isNotEmpty);
-    expect(
-      [r[0].name, r[1].name, r[2].name, r[3].name, r[4].name],
-      [
-        'Panda Express',
-        'India Palace',
-        'Denny\'s Restaurant',
-        'Burger King',
-        'New Hong Kong Wok',
-      ],
+    expect(result.length, 3);
+    expect(result.map((r) => r.name), [
+      'Spoon and Stable',
+      'Maison Margaux',
+      'La Casitas',
+    ]);
+  });
+
+  test('Client returns an empty list on API error', () async {
+    dioAdapter.onPost(
+      Env.restaurantsUrl,
+      (server) => server.throws(
+        500,
+        DioException(
+          requestOptions: RequestOptions(path: Env.restaurantsUrl),
+          response: Response(
+            requestOptions: RequestOptions(path: Env.restaurantsUrl),
+            statusCode: 500,
+          ),
+        ),
+      ),
+      data: Matchers.any,
     );
+
+    final List<Restaurant> result = await client.fetchNearbyRestaurants(
+      radius: 1000,
+      latitude: 45.02608885433202,
+      longitude: -93.19208827866116,
+      pageSize: 5,
+    );
+
+    expect(result, isEmpty);
   });
 }

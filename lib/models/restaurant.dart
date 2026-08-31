@@ -95,8 +95,10 @@ class Restaurant {
           (json['photos'] as List<dynamic>?)
               ?.where(
                 (photo) =>
-                    photo['authorAttributions']?[0]?['displayName'] as String ==
-                        json['displayName']?['text'] as String &&
+                    (photo['authorAttributions']?[0]?['displayName']
+                                as String? ??
+                            '') ==
+                        (json['displayName']?['text'] as String? ?? '') &&
                     (photo['widthPx'] as int? ?? 0) >= 360 &&
                     (photo['heightPx'] as int? ?? 0) >= 180,
               )
