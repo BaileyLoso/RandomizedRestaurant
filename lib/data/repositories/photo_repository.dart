@@ -1,26 +1,38 @@
 import 'package:randomized_restaurant/data/services/api/api_client.dart';
 import 'package:randomized_restaurant/models/photo.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class PhotoRepository {
-  Map<String, Photo> photos = {};
-  Map<String, DateTime> photoAccessTimes = {};
+part 'photo_repository.g.dart';
+
+class PhotoCacheEntry {
+  final Photo photo;
+  final DateTime accessTime;
+  PhotoCacheEntry(this.photo, this.accessTime);
+}
+
+@riverpod
+class PhotoRepository extends _$PhotoRepository {
   final ApiClient _client = ApiClient();
 
+  @override
+  Map<String, PhotoCacheEntry> build() => {};
+
   Future<Photo?> photo(String name) async {
-    if (photos[name] == null ||
-        DateTime.now().difference(photoAccessTimes[name]!).inDays >= 1) {
-      photos.remove(name);
-      photoAccessTimes.remove(name);
-      await _requestPhoto(name);
+    final cached = state[name];
+    final isStale =
+        cached == null ||
+        DateTime.now().difference(cached.accessTime).inDays >= 1;
+    if (isStale) {
+      return await _requestPhoto(name);
     }
-    return photos[name];
+    return cached.photo;
   }
 
-  Future<void> _requestPhoto(String photoName) async {
+  Future<Photo?> _requestPhoto(String photoName) async {
     var photo = await _client.fetchPhoto(photoName);
     if (photo != null) {
-      photos[photoName] = photo;
-      photoAccessTimes[photoName] = DateTime.now();
+      state = {...state, photoName: PhotoCacheEntry(photo, DateTime.now())};
     }
+    return photo;
   }
 }

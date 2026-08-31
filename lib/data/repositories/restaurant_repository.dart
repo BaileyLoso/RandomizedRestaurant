@@ -1,49 +1,50 @@
 import 'package:randomized_restaurant/data/services/api/api_client.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class RestaurantRepository {
-  List<Restaurant> restaurants = [];
-  Restaurant? selectedRestaurant;
+part 'restaurant_repository.g.dart';
+
+@riverpod
+class RestaurantRepository extends _$RestaurantRepository {
   int _index = 0;
   final ApiClient _client = ApiClient();
 
+  @override
+  List<Restaurant> build() {
+    return [];
+  }
+
   RestaurantRepository();
 
-  Future<List<Restaurant>> fetchRestaurants({
+  Future<void> fetchRestaurants({
     int radius = 5000,
     required double latitude,
     required double longitude,
     int pageSize = 20,
   }) async {
-    restaurants.clear();
     var r = await _client.fetchNearbyRestaurants(
       radius: radius,
       latitude: latitude,
       longitude: longitude,
       pageSize: 20,
     );
-    restaurants.addAll(r);
-    if (restaurants.isNotEmpty) {
-      restaurants.shuffle();
-    }
-    return restaurants;
+    r.shuffle();
+    _index = 0;
   }
 
   /// Selects a restaurant from the list of current restaurants
   Restaurant? select() {
-    if (restaurants.isNotEmpty) {
-      if (_index >= restaurants.length) {
-        _index = 0;
-      }
-      selectedRestaurant = restaurants[_index];
-      _index++;
-      return selectedRestaurant;
+    if (state.isEmpty) {
+      return null;
     }
-    return null;
+    if (_index >= state.length) {
+      _index = 0;
+    }
+    return state[_index++];
   }
 
   @override
   String toString() {
-    return restaurants.toString();
+    return state.toString();
   }
 }

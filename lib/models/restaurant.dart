@@ -29,7 +29,7 @@ class Restaurant {
   final List<AtmosphereFlag> atmosphereFlags;
 
   /// The primary photo
-  ({String name, int width, int height})? photo;
+  ({String name, int width, int height}) photo;
 
   /// Stores the names of photos associated with a particular [Restaurant].
   ///
@@ -53,7 +53,7 @@ class Restaurant {
     this.websiteUri,
     this.phoneNumber,
     this.atmosphereFlags = const [],
-
+    this.photo = (name: '', width: 0, height: 0),
     this.photos = const [],
   });
 
@@ -112,7 +112,7 @@ class Restaurant {
     );
   }
 
-  ({String name, int width, int height})? get primaryPhoto => photo;
+  ({String name, int width, int height}) get primaryPhoto => photo;
 
   set primaryPhoto(({String name, int width, int height}) updatedPhoto) {
     photo = updatedPhoto;
