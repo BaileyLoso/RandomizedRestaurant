@@ -5,9 +5,10 @@ import 'package:randomized_restaurant/models/photo.dart';
 
 // TODO: API Error handling
 class ApiClient {
-  final Dio _client = Dio(BaseOptions(connectTimeout: Duration(seconds: 10)));
+  final Dio _client;
 
-  ApiClient();
+  ApiClient({Dio? dio})
+    : _client = dio ?? Dio(BaseOptions(connectTimeout: Duration(seconds: 10)));
 
   Future<List<Restaurant>> fetchNearbyRestaurants({
     required int radius,
