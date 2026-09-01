@@ -12,8 +12,8 @@ class ApiClient {
 
   Future<List<Restaurant>> fetchNearbyRestaurants({
     required int radius,
-    double latitude = 0.0,
-    double longitude = 0.0,
+    double latitude = 44.97481647788996,
+    double longitude = -93.26898500057966,
     int pageSize = 20,
   }) async {
     try {
@@ -22,7 +22,7 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken, places.id,places.displayName,places.types,places.formattedAddress',
+            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos',
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
@@ -33,7 +33,7 @@ class ApiClient {
           'openNow': true,
           'rankPreference': 'DISTANCE',
           'strictTypeFiltering': true,
-          'locationRestriction': {
+          'locationBias': {
             'circle': {
               'center': {'latitude': latitude, 'longitude': longitude},
               'radius': radius,
@@ -76,9 +76,8 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken, places.id,places.displayName,places.types,places.formattedAddress',
+            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos',
             'X-Goog-Api-Key': Env.apiKey,
-            'pageToken': pageToken,
           },
         ),
         data: {
@@ -88,7 +87,8 @@ class ApiClient {
           'openNow': true,
           'rankPreference': 'DISTANCE',
           'strictTypeFiltering': true,
-          'locationRestriction': {
+          'pageToken': pageToken,
+          'locationBias': {
             'circle': {
               'center': {'latitude': latitude, 'longitude': longitude},
               'radius': radius,
@@ -117,7 +117,7 @@ class ApiClient {
           'skipHttpRedirect': 'true',
         },
       );
-      return Photo.fromPhotoJson(response.data as Map<String, String>);
+      return Photo.fromPhotoJson(response.data as Map<String, dynamic>);
     } catch (err) {
       print('API error: $err');
       return null;
