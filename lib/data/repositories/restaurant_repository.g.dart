@@ -20,7 +20,7 @@ final class RestaurantRepositoryProvider
         argument: null,
         retry: null,
         name: r'restaurantRepositoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -42,7 +42,7 @@ final class RestaurantRepositoryProvider
 }
 
 String _$restaurantRepositoryHash() =>
-    r'0da084e71c2effdcaf849020f78dc5b27a4c469b';
+    r'94121939f6b1281fb49b1024fe375c617900bb84';
 
 abstract class _$RestaurantRepository extends $Notifier<List<Restaurant>> {
   List<Restaurant> build();

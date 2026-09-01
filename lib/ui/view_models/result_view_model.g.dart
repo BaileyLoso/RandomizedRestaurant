@@ -20,7 +20,7 @@ final class ResultViewModelProvider
         argument: null,
         retry: null,
         name: r'resultViewModelProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class ResultViewModelProvider
   }
 }
 
-String _$resultViewModelHash() => r'dbadc4fd8446fa7a901b09640e1535ede73518f1';
+String _$resultViewModelHash() => r'48f9698cbba675b2626a845122539e41e0d99fee';
 
 abstract class _$ResultViewModel extends $Notifier<RandomizerState> {
   RandomizerState build();
@@ -61,35 +61,55 @@ abstract class _$ResultViewModel extends $Notifier<RandomizerState> {
   }
 }
 
-@ProviderFor(displayPhoto)
-final displayPhotoProvider = DisplayPhotoProvider._();
+@ProviderFor(ResultPhotoViewModel)
+final resultPhotoViewModelProvider = ResultPhotoViewModelProvider._();
 
-final class DisplayPhotoProvider
-    extends $FunctionalProvider<AsyncValue<Photo?>, Photo?, FutureOr<Photo?>>
-    with $FutureModifier<Photo?>, $FutureProvider<Photo?> {
-  DisplayPhotoProvider._()
+final class ResultPhotoViewModelProvider
+    extends $NotifierProvider<ResultPhotoViewModel, Photo?> {
+  ResultPhotoViewModelProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'displayPhotoProvider',
+        name: r'resultPhotoViewModelProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$displayPhotoHash();
+  String debugGetCreateSourceHash() => _$resultPhotoViewModelHash();
 
   @$internal
   @override
-  $FutureProviderElement<Photo?> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  ResultPhotoViewModel create() => ResultPhotoViewModel();
 
-  @override
-  FutureOr<Photo?> create(Ref ref) {
-    return displayPhoto(ref);
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Photo? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Photo?>(value),
+    );
   }
 }
 
-String _$displayPhotoHash() => r'3971ea43a332aa0e1cc15f822569c7001bf9fa5f';
+String _$resultPhotoViewModelHash() =>
+    r'152a3d38805c0ff6fc417f57d9aa5eaf6af5670f';
+
+abstract class _$ResultPhotoViewModel extends $Notifier<Photo?> {
+  Photo? build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<Photo?, Photo?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Photo?, Photo?>,
+              Photo?,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

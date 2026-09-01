@@ -21,7 +21,6 @@ class RandomizerState {
   RandomizerState copyWith({
     List<Restaurant>? candidates,
     Restaurant? pickedRestaurant,
-    Photo? displayPhoto,
     bool? isLoading,
   }) => RandomizerState(
     candidates: candidates ?? this.candidates,
@@ -30,7 +29,7 @@ class RandomizerState {
   );
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ResultViewModel extends _$ResultViewModel {
   @override
   RandomizerState build() {
@@ -40,14 +39,23 @@ class ResultViewModel extends _$ResultViewModel {
 
   Future<void> load({double? latitude, double? longitude}) async {
     state = state.copyWith(isLoading: true);
+    Restaurant? pickedRestaurant;
+    if (state.candidates.isNotEmpty) {
+      pickedRestaurant = ref
+          .read(restaurantRepositoryProvider.notifier)
+          .select();
+    } else {
+      await ref
+          .read(restaurantRepositoryProvider.notifier)
+          .fetchRestaurants(latitude: latitude ?? 0, longitude: longitude ?? 0);
 
-    await ref
-        .read(restaurantRepositoryProvider.notifier)
-        .fetchRestaurants(latitude: latitude ?? 0, longitude: longitude ?? 0);
-
-    final pickedRestaurant = ref
-        .read(restaurantRepositoryProvider.notifier)
-        .select();
+      if (!ref.mounted) {
+        return;
+      }
+      pickedRestaurant = ref
+          .read(restaurantRepositoryProvider.notifier)
+          .select();
+    }
 
     state = state.copyWith(
       isLoading: false,
@@ -57,12 +65,21 @@ class ResultViewModel extends _$ResultViewModel {
 }
 
 @riverpod
-Future<Photo?> displayPhoto(Ref ref) async {
-  final picked = ref.watch(
-    resultViewModelProvider.select((state) => state.pickedRestaurant),
-  );
-  if (picked == null) {
-    return null;
+class ResultPhotoViewModel extends _$ResultPhotoViewModel {
+  @override
+  Photo? build() => Photo(name: '', uri: '');
+
+  Future<Photo?> mainPhoto() async {
+    final picked = ref.watch(
+      resultViewModelProvider.select((state) => state.pickedRestaurant),
+    ); // Gets the picked restaurant
+    if (picked == null) {
+      return null;
+    }
+    return await ref
+        .read(photoRepositoryProvider.notifier)
+        .photo(
+          picked.photo.name,
+        ); // Get photo from photo repository with the same name
   }
-  return ref.read(photoRepositoryProvider.notifier).photo(picked.photo.name);
 }

@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'restaurant_repository.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class RestaurantRepository extends _$RestaurantRepository {
   int _index = 0;
   final ApiClient _client = ApiClient();
@@ -28,7 +28,11 @@ class RestaurantRepository extends _$RestaurantRepository {
       longitude: longitude,
       pageSize: 20,
     );
+    if (!ref.mounted) {
+      return;
+    }
     r.shuffle();
+    state = r;
     _index = 0;
   }
 
