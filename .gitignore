@@ -56,3 +56,6 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 lib/env.g.dart
 # Widget Preview related
 .widget_preview/
+windows/flutter/generated_plugins.cmake
+windows/flutter/generated_plugin_registrant.cc
+macos/Flutter/GeneratedPluginRegistrant.swift
