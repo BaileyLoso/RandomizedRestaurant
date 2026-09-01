@@ -16,14 +16,17 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final results = ref.watch(resultViewModelProvider);
-    final restaurant = results.pickedRestaurant;
-    if (results.isLoading) {
+    final randomizerResults = ref.watch(resultViewModelProvider);
+    final restaurant = randomizerResults.pickedRestaurant;
+
+    if (randomizerResults.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (restaurant == null) {
       return const Center(child: Text("No restaurants found"));
     }
+    final photo = ref.watch(resultPhotoViewModelProvider.notifier).mainPhoto();
+
     return ListView(
       children: [
         Padding(
@@ -56,7 +59,11 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                       ),
                       child: AspectRatio(
                         aspectRatio: 8 / 9,
-                        child: SizedBox.expand(),
+                        child: Image.network(
+                          'https://spotpetinsurance.ca/_next/image?url=https:%2F%2Fimages.ctfassets.net%2Fm5ehn3s5t7ec%2Fwp-image-197581%2Fa5246e00944982b564d4c610c56577f1%2FHouse-Cat-Breeds.jpg&w=1200&q=75',
+                          width: MediaQuery.sizeOf(context).width,
+                          height: MediaQuery.sizeOf(context).height,
+                        ),
                       ),
                     ),
                     Positioned(
