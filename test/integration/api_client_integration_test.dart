@@ -14,10 +14,10 @@ void main() {
     );
 
     expect(r, isNotEmpty);
-    expect(r.length, 5);
+    expect(r.length, 10);
     expect(
-      [r[0].name, r[1].name, r[2].name, r[3].name, r[4].name],
-      contains([
+      r.map((restaurant) => restaurant.name),
+      containsAll([
         'Panda Express',
         'India Palace',
         'Denny\'s Restaurant',
