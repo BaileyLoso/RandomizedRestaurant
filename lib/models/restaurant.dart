@@ -63,7 +63,7 @@ class Restaurant {
         json['generativeSummary']?['overview']?['text'] as String?;
     var summaryRecord = (editorialSummary, generativeSummary);
 
-    return Restaurant(
+    var r = Restaurant(
       id: json['id']! as String,
       name: json['displayName']?['text'] as String? ?? '',
       address: json['formattedAddress'] as String? ?? '',
@@ -93,15 +93,17 @@ class Restaurant {
       phoneNumber: json['nationalPhoneNumber'] as String? ?? '',
       photos:
           (json['photos'] as List<dynamic>?)
-              ?.where(
-                (photo) =>
-                    (photo['authorAttributions']?[0]?['displayName']
-                                as String? ??
-                            '') ==
-                        (json['displayName']?['text'] as String? ?? '') &&
-                    (photo['widthPx'] as int? ?? 0) >= 360 &&
-                    (photo['heightPx'] as int? ?? 0) >= 180,
-              )
+              ?.where((photo) {
+                var author =
+                    photo['authorAttributions']?[0]?['displayName'] as String?;
+                if (author != null &&
+                    author == (json['displayName']?['text'] as String? ?? '')) {
+                  return (photo['widthPx'] as int? ?? 0) >= 360 &&
+                      (photo['heightPx'] as int? ?? 0) >= 180;
+                } else {
+                  return true;
+                }
+              })
               .map(
                 (photo) => (
                   name: photo['name'] as String,
@@ -112,12 +114,13 @@ class Restaurant {
               .toList() ??
           [],
     );
+
+    r.initPrimaryPhoto();
+    return r;
   }
 
-  ({String name, int width, int height}) get primaryPhoto => photo;
-
-  set primaryPhoto(({String name, int width, int height}) updatedPhoto) {
-    photo = updatedPhoto;
+  void initPrimaryPhoto() {
+    photo = photos.isNotEmpty ? photos.first : photo;
   }
 
   /// Returns the [PriceLevel] enum value from a string value.
