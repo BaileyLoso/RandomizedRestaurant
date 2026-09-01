@@ -7,7 +7,7 @@ class Photo {
   Photo({required this.name, required this.uri, this.maxWidth, this.maxHeight});
 
   factory fromPhotoJson(
-    Map<String, String> json, {
+    Map<String, dynamic> json, {
     int? maxWidth,
     int? maxHeight,
   }) {
