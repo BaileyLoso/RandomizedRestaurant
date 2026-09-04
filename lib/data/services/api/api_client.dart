@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:randomized_restaurant/env.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
 import 'package:randomized_restaurant/models/photo.dart';
@@ -22,17 +25,17 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos',
+            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos,places.primaryTypeDisplayName,places.types,places.currentOpeningHours,places.currentSecondaryOpeningHours,places.priceLevel,places.priceRange,places.rating,places.userRatingCount',
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
         data: {
           'textQuery': 'restaurant',
-          'includedType': 'restaurant',
           'pageSize': pageSize,
           'openNow': true,
-          'rankPreference': 'DISTANCE',
+          'includedType': 'restaurant',
           'strictTypeFiltering': true,
+          'rankPreference': 'DISTANCE',
           'locationBias': {
             'circle': {
               'center': {'latitude': latitude, 'longitude': longitude},
@@ -44,18 +47,18 @@ class ApiClient {
 
       var res = response.data['places'] as List;
       var list = res.map((json) => Restaurant.fromPlacesApiJson(json)).toList();
-      var pageToken = response.data['nextPageToken'] as String? ?? '';
-      if (pageToken != '') {
-        list.addAll(
-          await _fetchNextRestaurants(
-            radius: radius,
-            latitude: latitude,
-            longitude: longitude,
-            pageSize: pageSize,
-            pageToken: pageToken,
-          ),
-        );
-      }
+      // var pageToken = response.data['nextPageToken'] as String? ?? '';
+      // if (pageToken != '') {
+      //   list.addAll(
+      //     await fetchNextRestaurants(
+      //       radius: radius,
+      //       latitude: latitude,
+      //       longitude: longitude,
+      //       pageSize: pageSize,
+      //       pageToken: pageToken,
+      //     ),
+      //   );
+      // }
       return list;
     } catch (err) {
       print('API error: $err');
@@ -63,7 +66,23 @@ class ApiClient {
     }
   }
 
-  Future<List<Restaurant>> _fetchNextRestaurants({
+  Future<List<Restaurant>> fetchSampleRestaurants({
+    int? radius,
+    double? latitude,
+    double? longitude,
+    double? pageSize,
+  }) async {
+    var res = await rootBundle.loadString(
+      'test/fixtures/test_request_data.json',
+    );
+    var data = jsonDecode(res) as Map<String, dynamic>;
+    var list = (data['places'] as List<dynamic>)
+        .map((json) => Restaurant.fromPlacesApiJson(json))
+        .toList();
+    return list;
+  }
+
+  Future<List<Restaurant>> fetchNextRestaurants({
     required int radius,
     required double latitude,
     required double longitude,
@@ -76,17 +95,15 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos',
+            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos,places.primaryTypeDisplayName,places.types,places.currentOpeningHours,places.secondaryOpeningHours,places.priceLevel,places.priceRange,place.rating,place.userRatingCount',
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
         data: {
-          'textQuery': 'restaurant',
-          'includedType': 'restaurant',
+          'textQuery': 'food',
           'pageSize': pageSize,
           'openNow': true,
           'rankPreference': 'DISTANCE',
-          'strictTypeFiltering': true,
           'pageToken': pageToken,
           'locationBias': {
             'circle': {
@@ -105,7 +122,7 @@ class ApiClient {
     }
   }
 
-  Future<Photo?> fetchPhoto(String name) async {
+  Future<Photo> fetchPhoto(String name) async {
     try {
       final response = await _client.get(
         '${Env.baseUrl}$name/media',
@@ -120,7 +137,7 @@ class ApiClient {
       return Photo.fromPhotoJson(response.data as Map<String, dynamic>);
     } catch (err) {
       print('API error: $err');
-      return null;
+      return Photo(name: '', uri: '');
     }
   }
 }
