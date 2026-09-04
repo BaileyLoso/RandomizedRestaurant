@@ -42,6 +42,7 @@ class _AppNavBarState extends State<AppNavBar> {
         backgroundColor: themeStyle.surfaceContainer,
       ),
       child: NavigationBar(
+        height: 56,
         selectedIndex: currentPageIndex,
         indicatorColor: themeStyle.tertiaryContainer,
         destinations: [
