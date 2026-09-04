@@ -60,6 +60,6 @@ class RestaurantRepository extends _$RestaurantRepository {
     if (_index <= 0) {
       _index = state.length - 1;
     }
-    return state[_index];
+    return state[_index--];
   }
 }
