@@ -22,7 +22,7 @@ class RestaurantRepository extends _$RestaurantRepository {
     required double longitude,
     int pageSize = 20,
   }) async {
-    var r = await _client.fetchNearbyRestaurants(
+    var r = await _client.fetchSampleRestaurants(
       radius: radius,
       latitude: latitude,
       longitude: longitude,
