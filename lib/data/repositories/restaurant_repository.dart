@@ -36,7 +36,7 @@ class RestaurantRepository extends _$RestaurantRepository {
     _index = 0;
   }
 
-  /// Selects a restaurant from the list of current restaurants
+  /// Selects a restaurant from the list of current restaurants.
   Restaurant? select() {
     if (state.isEmpty) {
       return null;
@@ -50,5 +50,16 @@ class RestaurantRepository extends _$RestaurantRepository {
   @override
   String toString() {
     return state.toString();
+  }
+
+  /// Returns the previous item in the list of restaurants.
+  Restaurant? previous() {
+    if (state.isEmpty) {
+      return null;
+    }
+    if (_index <= 0) {
+      _index = state.length - 1;
+    }
+    return state[_index];
   }
 }
