@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:randomized_restaurant/widgets/next_button.dart';
 import 'package:randomized_restaurant/widgets/restaurant_card_view.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -12,7 +13,6 @@ class ResultScreen extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     // TODO fix scaling of toolbar icons
-    // TODO add re-roll button
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
@@ -45,7 +45,7 @@ class ResultScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.only(top: 8),
 
-        children: [RestaurantCardView()],
+        children: [RestaurantCardView(), NextButton()],
       ),
     );
   }
