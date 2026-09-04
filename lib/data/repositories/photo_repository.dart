@@ -17,7 +17,7 @@ class PhotoRepository extends _$PhotoRepository {
   @override
   Map<String, PhotoCacheEntry> build() => {};
 
-  Future<Photo?> photo(String name) async {
+  Future<Photo> photo(String name) async {
     final cached = state[name];
     final isStale =
         cached == null ||
@@ -28,11 +28,9 @@ class PhotoRepository extends _$PhotoRepository {
     return cached.photo;
   }
 
-  Future<Photo?> _requestPhoto(String photoName) async {
+  Future<Photo> _requestPhoto(String photoName) async {
     var photo = await _client.fetchPhoto(photoName);
-    if (photo != null) {
-      state = {...state, photoName: PhotoCacheEntry(photo, DateTime.now())};
-    }
+    state = {...state, photoName: PhotoCacheEntry(photo, DateTime.now())};
     return photo;
   }
 }

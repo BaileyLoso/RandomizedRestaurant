@@ -18,14 +18,14 @@ class Restaurant {
   final ({double latitude, double longitude}) location;
   final OperatingHours operatingHours;
   final List<String> categoryTypes; // e.g., ['sports_bar', 'cat_cafe']
-  final String? primaryType;
-  final double? rating;
-  final int? userRatingCount;
+  final String primaryType;
+  final double rating;
+  final int userRatingCount;
   final PriceLevel priceLevel;
-  final ({String startPrice, String endPrice})? priceRange;
-  final String? summary;
-  final String? websiteUri;
-  final String? phoneNumber;
+  final ({String startPrice, String endPrice}) priceRange;
+  final String summary;
+  final String websiteUri;
+  final String phoneNumber;
   final List<AtmosphereFlag> atmosphereFlags;
 
   /// The primary photo
@@ -44,17 +44,17 @@ class Restaurant {
     required this.location,
     required this.operatingHours,
     required this.categoryTypes,
-    this.primaryType,
-    this.rating,
-    this.userRatingCount,
-    this.priceLevel = PriceLevel.unspecified,
-    this.priceRange,
-    this.summary,
-    this.websiteUri,
-    this.phoneNumber,
-    this.atmosphereFlags = const [],
+    required this.primaryType,
+    required this.rating,
+    required this.userRatingCount,
+    required this.priceLevel,
+    required this.priceRange,
+    required this.summary,
+    required this.websiteUri,
+    required this.phoneNumber,
+    required this.atmosphereFlags,
     this.photo = (name: '', width: 0, height: 0),
-    this.photos = const [],
+    required this.photos,
   });
 
   factory Restaurant.fromPlacesApiJson(Map<String, dynamic> json) {
