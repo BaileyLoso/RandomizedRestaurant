@@ -45,7 +45,7 @@ class ResultScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.only(top: 8),
 
-        children: [RestaurantCardView(), NextButton()],
+        children: [RestaurantCardView(), NextResultButton()],
       ),
     );
   }
