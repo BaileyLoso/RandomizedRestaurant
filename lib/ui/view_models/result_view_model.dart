@@ -62,6 +62,20 @@ class ResultViewModel extends _$ResultViewModel {
       pickedRestaurant: pickedRestaurant,
     );
   }
+
+  void nextRestaurant() {
+    final pickedRestaurant = ref
+        .read(restaurantRepositoryProvider.notifier)
+        .select();
+    state = state.copyWith(pickedRestaurant: pickedRestaurant);
+  }
+
+  void previousRestaurant() {
+    final pickedRestaurant = ref
+        .read(restaurantRepositoryProvider.notifier)
+        .previous();
+    state = state.copyWith(pickedRestaurant: pickedRestaurant);
+  }
 }
 
 @riverpod
