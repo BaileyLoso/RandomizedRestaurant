@@ -74,7 +74,6 @@ class MyApp extends StatelessWidget {
       theme: brightness == Brightness.light
           ? theme.lightMediumContrast()
           : theme.lightMediumContrast(),
-      // theme: theme.lightMediumContrast(),
     );
   }
 }
