@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 
 class RatingsBar extends StatelessWidget {
-  new({
+  const new({
     super.key,
     required this.rating,
     required this.reviewCount,
@@ -12,11 +12,11 @@ class RatingsBar extends StatelessWidget {
   }) : assert(rating >= 0 && rating <= 5),
        assert(reviewCount >= 0);
 
-  double rating;
-  int reviewCount;
-  double? fontSize;
-  TextStyle? style;
-  Color? starColor;
+  final double rating;
+  final int reviewCount;
+  final double? fontSize;
+  final TextStyle? style;
+  final Color? starColor;
 
   @override
   Widget build(BuildContext context) {
