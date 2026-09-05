@@ -35,7 +35,7 @@ class _RestaurantDetailsScreenState
           ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: double.maxFinite,
-              maxHeight: 425,
+              maxHeight: MediaQuery.heightOf(context) * 0.4,
             ),
             child: ResultPhoto(name: restaurant!.photo.name),
           ),
@@ -71,7 +71,7 @@ class _RestaurantDetailsScreenState
                             ),
                             TextSpan(
                               text:
-                                  ' ${restaurant.primaryType.replaceAll('_', ' ').titleCase()}',
+                                  ' – ${restaurant.primaryType.replaceAll('_', ' ').titleCase()}',
                             ),
                           ],
                         ),
