@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 
-class NextResultButton extends ConsumerWidget {
+class PreviousResultButton extends ConsumerWidget {
   const new({super.key});
 
   @override
@@ -16,8 +16,7 @@ class NextResultButton extends ConsumerWidget {
           borderRadius: BorderRadiusGeometry.circular(25),
         ),
       ),
-      maximumSize: WidgetStatePropertyAll(Size(200, 40)),
-      minimumSize: WidgetStatePropertyAll(Size(100, 40)),
+      maximumSize: WidgetStatePropertyAll(Size(125, 40)),
       backgroundColor: WidgetStateColor.fromMap(<WidgetStatesConstraint, Color>{
         WidgetState.focused | WidgetState.pressed: theme.tertiary,
         WidgetState.disabled: theme.secondaryContainer,
@@ -28,19 +27,19 @@ class NextResultButton extends ConsumerWidget {
     return FilledButton(
       style: buttonStyle,
       onPressed: () =>
-          ref.read(resultViewModelProvider.notifier).nextRestaurant(),
+          ref.read(resultViewModelProvider.notifier).previousRestaurant(),
       child: Row(
         mainAxisAlignment: .center,
         mainAxisSize: .min,
         children: [
+          const Icon(Icons.chevron_left),
+          const SizedBox(width: 4),
           Text(
-            'Next',
+            'Back',
             style: textTheme.labelLarge?.copyWith(
               color: theme.onTertiaryContainer,
             ),
           ),
-          const SizedBox(width: 4),
-          const Icon(Icons.chevron_right),
         ],
       ),
     );
