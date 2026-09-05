@@ -38,9 +38,9 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
       mainAxisAlignment: .start,
       children: [
         Padding(
-          padding: EdgeInsetsGeometry.all(24.0),
+          padding: .all(24.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               GestureDetector(
                 onTap: () => context.pushNamed(
@@ -55,7 +55,7 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                         maxWidth: 400.0,
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: .circular(28),
                         child: AspectRatio(
                           aspectRatio: 8 / 9,
                           child: ResultPhoto(name: restaurant.photo.name),
@@ -67,7 +67,7 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                       bottom: 16,
                       width: min(MediaQuery.widthOf(context) * 0.4, 120),
                       child: FittedBox(
-                        fit: BoxFit.fill,
+                        fit: .fill,
                         child: RichText(
                           text: TextSpan(
                             text: 'More details ',
@@ -92,13 +92,13 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                 ),
               ),
               FittedBox(
-                fit: BoxFit.scaleDown,
+                fit: .scaleDown,
                 alignment: .topLeft,
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(0),
+                      padding: .all(0),
 
                       child: Text(
                         restaurant.name,
@@ -108,7 +108,7 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 0),
+                      padding: const .only(left: 0),
                       child: RatingsBar(
                         rating: restaurant.rating,
                         reviewCount: restaurant.userRatingCount,
