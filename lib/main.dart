@@ -69,6 +69,7 @@ class MyApp extends StatelessWidget {
 
     // Note
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
       title: 'Flutter Demo',
       theme: brightness == Brightness.light
