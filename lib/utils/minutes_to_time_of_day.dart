@@ -7,3 +7,7 @@ import 'package:randomized_restaurant/models/operating_hours.dart';
 extension MinutesToTimeOfDay on int {
   TimeOfDay toTimeOfDay() => TimeOfDay(hour: this ~/ 60, minute: this % 60);
 }
+
+extension MinutesFromMidnight on DateTime {
+  int minutesFromMidnight() => hour * 60 + minute;
+}
