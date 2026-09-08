@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
+import 'package:randomized_restaurant/widgets/attributes_dropdown.dart';
+import 'package:randomized_restaurant/widgets/hours_dropdown.dart';
 import 'package:randomized_restaurant/widgets/result_photo.dart';
 
 import '../../utils/string_helpers.dart';
@@ -44,12 +46,13 @@ class _RestaurantDetailsScreenState
             child: Align(
               alignment: AlignmentGeometry.centerLeft,
               child: Column(
+                spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     restaurant.name,
                     style: textStyle.headlineMedium?.copyWith(
-                      color: style.primary,
+                      color: style.onSurface,
                     ),
                   ),
                   Row(
@@ -59,7 +62,7 @@ class _RestaurantDetailsScreenState
                         text: TextSpan(
                           text: restaurant.rating.toString(),
                           style: textStyle.titleMedium?.copyWith(
-                            color: style.onSurfaceVariant,
+                            color: style.onSurface,
                           ),
                           children: [
                             WidgetSpan(
@@ -71,16 +74,30 @@ class _RestaurantDetailsScreenState
                             ),
                             TextSpan(
                               text:
-                                  ' – ${restaurant.primaryType.replaceAll('_', ' ').titleCase()}',
+                                  ' · ${restaurant.primaryType.replaceAll('_', ' ').toTitleCase()}',
+                              style: textStyle.titleMedium?.copyWith(
+                                color: style.onSurface,
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
+                  Divider(),
+                  Text(
+                    restaurant.summary,
+                    style: textStyle.bodyLarge?.copyWith(
+                      color: style.onSurface,
+                    ),
+                  ),
                   Padding(
-                    padding: EdgeInsetsGeometry.directional(top: 8.0),
-                    child: Text(''),
+                    padding: const .only(top: 8.0),
+                    child: AttributesDropdown(),
+                  ),
+                  Padding(
+                    padding: const .only(top: 8.0),
+                    child: HoursDropdown(),
                   ),
                 ],
               ),
