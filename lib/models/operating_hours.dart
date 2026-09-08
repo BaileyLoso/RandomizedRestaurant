@@ -17,7 +17,7 @@ class OperatingHours {
     );
   }
 
-  Day day(int dayOfWeek) => days[dayOfWeek];
+  Day day(int dayOfWeek) => days[dayOfWeek % 7];
 
   @override
   String toString() {
@@ -81,6 +81,19 @@ class Day {
     final hour = (time['hour'] as num?)?.toInt() ?? 0;
     final minute = (time['minute'] as num?)?.toInt() ?? 0;
     return hour * 60 + minute;
+  }
+
+  String dayName() {
+    return switch (dayOfWeek) {
+      0 => 'Sunday',
+      1 => 'Monday',
+      2 => 'Tuesday',
+      3 => 'Wednesday',
+      4 => 'Thursday',
+      5 => 'Friday',
+      6 => 'Saturday',
+      _ => 'Invalid value',
+    };
   }
 
   @override
