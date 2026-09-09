@@ -33,7 +33,7 @@ class AttributesDropdown extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: ExpansionTile(
-        backgroundColor: backgroundColor ?? collapsedBackgroundColor,
+        backgroundColor: backgroundColor,
         collapsedBackgroundColor: collapsedBackgroundColor ?? backgroundColor,
         iconColor: textColor,
         collapsedIconColor: textColor,
