@@ -30,7 +30,22 @@ class _RestaurantDetailsScreenState
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(elevation: 0, backgroundColor: Colors.transparent),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Padding(
+          padding: const .all(8.0),
+          child: Material(
+            color: Colors.black.withValues(alpha: 0.4),
+            shape: const CircleBorder(),
+            clipBehavior: .antiAlias,
+            child: BackButton(
+              color: Colors.white,
+              onPressed: () => Navigator.of(context).maybePop(),
+            ),
+          ),
+        ),
+      ),
       body: ListView(
         padding: EdgeInsets.all(0),
         children: [
