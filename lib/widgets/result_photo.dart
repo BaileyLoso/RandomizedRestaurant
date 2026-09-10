@@ -20,11 +20,6 @@ class _ResultPhotoState extends ConsumerState<ResultPhoto> {
     return switch (entry) {
       PhotoCacheEntry(photo: _, accessTime: _) => Container(
         decoration: BoxDecoration(
-          // gradient: LinearGradient(
-          //   colors: [Colors.transparent, Colors.black],
-          //   begin: AlignmentGeometry.center,
-          //   end: AlignmentGeometry.bottomCenter,
-          // ),
           image: DecorationImage(
             image: NetworkImage(entry.photo.uri),
             fit: BoxFit.cover,
