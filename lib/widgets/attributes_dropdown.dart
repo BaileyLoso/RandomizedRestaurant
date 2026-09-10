@@ -3,16 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 
 class AttributesDropdown extends ConsumerWidget {
-  const AttributesDropdown({
-    super.key,
-    this.backgroundColor,
-    this.collapsedBackgroundColor,
-    this.textColor,
-  });
-
-  final Color? backgroundColor;
-  final Color? collapsedBackgroundColor;
-  final Color? textColor;
+  const AttributesDropdown({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,19 +22,12 @@ class AttributesDropdown extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const .symmetric(horizontal: 8),
       child: ExpansionTile(
-        backgroundColor: backgroundColor,
-        collapsedBackgroundColor: collapsedBackgroundColor ?? backgroundColor,
-        iconColor: textColor,
-        collapsedIconColor: textColor,
         shape: RoundedRectangleBorder(borderRadius: .circular(25)),
         collapsedShape: RoundedRectangleBorder(borderRadius: .circular(25)),
 
-        title: Text(
-          'Offerings',
-          style: textTheme.titleLarge?.copyWith(color: textColor),
-        ),
+        title: Text('Offerings', style: textTheme.titleLarge),
         maintainState: true,
         visualDensity: .compact,
         children: [

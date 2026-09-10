@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 import 'package:randomized_restaurant/utils/minutes_to_time_of_day.dart';
 import 'package:randomized_restaurant/widgets/operating_hours_card.dart';
@@ -18,10 +19,7 @@ class HoursDropdown extends ConsumerWidget {
 
     if (hours == null) {
       return ExpansionTile(
-        title: Text(
-          'Hours',
-          style: textTheme.titleLarge?.copyWith(color: style.onSurface),
-        ),
+        title: Text('Hours', style: textTheme.titleLarge),
         enabled: false,
       );
     }
@@ -42,45 +40,26 @@ class HoursDropdown extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ExpansionTile(
-        backgroundColor: style.tertiaryContainer,
-        collapsedBackgroundColor: style.tertiaryContainer,
         collapsedShape: RoundedRectangleBorder(borderRadius: .circular(25)),
         shape: RoundedRectangleBorder(borderRadius: .circular(25)),
-        iconColor: style.onTertiaryContainer,
-        collapsedIconColor: style.onSecondaryContainer,
-        collapsedTextColor: style.onSecondaryContainer,
 
-        title: Text(
-          'Hours',
-          style: textTheme.titleLarge?.copyWith(
-            color: style.onTertiaryContainer,
-          ),
-        ),
+        title: Text('Hours', style: textTheme.titleLarge),
         subtitle: timeToClose == null
-            ? Text(
-                'Closed',
-                style: textTheme.titleMedium?.copyWith(
-                  color: style.onTertiaryContainer,
-                ),
-              )
+            ? Text('Closed', style: textTheme.titleMedium)
             : switch (timeToClose) {
                 >= 60 => Text(
                   'Open until ${closingTime!.toTimeOfDay().format(context)}',
                   style: textTheme.titleMedium?.copyWith(
-                    color: style.onTertiaryContainer,
+                    color: MaterialTheme.success.value,
                   ),
                 ),
                 > 0 => Text(
                   'Closing soon at ${closingTime!.toTimeOfDay().format(context)}',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: style.onTertiaryContainer,
-                  ),
+                  style: textTheme.titleMedium?.copyWith(color: style.tertiary),
                 ),
                 _ => Text(
                   'Closed',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: style.onTertiaryContainer,
-                  ),
+                  style: textTheme.titleMedium?.copyWith(color: style.error),
                 ),
               },
         childrenPadding: .directional(top: 8),

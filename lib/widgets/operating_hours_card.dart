@@ -23,7 +23,6 @@ class OperatingHoursCard extends ConsumerWidget {
     super.key,
     required this.operatingHours,
     this.secondaryHoursType,
-    this.title,
   });
 
   /// A collection of primary and secondary operating hours.
@@ -32,16 +31,10 @@ class OperatingHoursCard extends ConsumerWidget {
   /// The category of operating hours aside from normal business hours.
   final String? secondaryHoursType;
 
-  /// An optional title to replace the default header.
-  ///
-  /// When null, this widget will display 'Primary Hours' or
-  /// [secondaryHoursType] if it is non-null.
-  final String? title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = TextTheme.of(context);
-    final style = ColorScheme.of(context);
 
     if (secondaryHoursType == null) {
       return Padding(
@@ -54,7 +47,6 @@ class OperatingHoursCard extends ConsumerWidget {
                 'Primary Hours',
                 style: textTheme.bodyLarge?.copyWith(
                   fontWeight: .bold,
-                  color: style.onPrimaryContainer,
                 ),
               ),
             ),
@@ -69,7 +61,6 @@ class OperatingHoursCard extends ConsumerWidget {
                       '${day.dayName()}:',
                       style: textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: style.onPrimaryContainer,
                       ),
                     ),
                     Expanded(
@@ -83,7 +74,6 @@ class OperatingHoursCard extends ConsumerWidget {
                             .join('\n'),
                         textAlign: .end,
                         style: textTheme.bodyMedium?.copyWith(
-                          color: style.onPrimaryContainer,
                         ),
                       ),
                     ),
@@ -98,10 +88,8 @@ class OperatingHoursCard extends ConsumerWidget {
 
     return ExpansionTile(
       maintainState: true,
-      backgroundColor: style.tertiaryFixedDim,
       title: Center(
         child: Text(
-          title ??
               secondaryHoursType
                   ?.replaceAll('_', ' ')
                   .toLowerCase()
@@ -109,7 +97,6 @@ class OperatingHoursCard extends ConsumerWidget {
               '',
           style: textTheme.bodyLarge?.copyWith(
             fontWeight: .bold,
-            color: style.onTertiaryFixed,
           ),
         ),
       ),
@@ -137,7 +124,6 @@ class OperatingHoursCard extends ConsumerWidget {
                             '${day.dayName()}:',
                             style: textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: style.onTertiaryFixed,
                             ),
                           ),
                           Expanded(
@@ -156,7 +142,6 @@ class OperatingHoursCard extends ConsumerWidget {
                                   '',
                               textAlign: .end,
                               style: textTheme.bodyMedium?.copyWith(
-                                color: style.onTertiaryFixed,
                               ),
                             ),
                           ),
