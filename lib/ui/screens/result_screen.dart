@@ -42,30 +42,32 @@ class ResultScreen extends StatelessWidget {
         ),
       ),
 
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const .only(top: 8),
-              child: RestaurantCardView(),
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const .only(top: 8),
+                child: RestaurantCardView(),
+              ),
             ),
-          ),
-          SafeArea(
-            child: FittedBox(
-              fit: .scaleDown,
+            SafeArea(
+              child: FittedBox(
+                fit: .scaleDown,
 
-              child: Padding(
-                padding: const .only(bottom: 12.0),
-                child: Row(
-                  spacing: 16,
-                  mainAxisAlignment: .center,
+                child: Padding(
+                  padding: const .only(bottom: 12.0),
+                  child: Row(
+                    spacing: 16,
+                    mainAxisAlignment: .center,
 
-                  children: [PreviousResultButton(), NextResultButton()],
+                    children: [PreviousResultButton(), NextResultButton()],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
