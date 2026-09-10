@@ -17,7 +17,7 @@ class ApiClient {
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
-    Set<String> types = const {'restaurant'},
+    Set<String> types = const {},
   }) async {
     try {
       final response = await _client.postUri(
@@ -30,7 +30,7 @@ class ApiClient {
           },
         ),
         data: {
-          'includedTypes': types.toList(),
+          'includedTypes': types.isNotEmpty ? types.toList() : {'restaurant'},
           'excludedPrimaryTypes': ['convenience_store, gas_station, supermarket, grocery_store, health_food_store, food_store'],
           'strictTypeFiltering': true,
           'locationRestriction': {
