@@ -10,7 +10,6 @@ void main() {
       radius: 1000,
       latitude: 45.02608885433202,
       longitude: -93.19208827866116,
-      pageSize: 5,
     );
 
     expect(r, isNotEmpty);
