@@ -55,6 +55,7 @@ class ApiClient {
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
+    String query = ''
   }) async {
     try {
       final response = await _client.postUri(
@@ -67,10 +68,10 @@ class ApiClient {
           },
         ),
         data: {
-          'textQuery': 'restaurant',
+          'textQuery': query != '' ? query.replaceAll('_', ' ') : 'restaurant',
           'pageSize': 20,
           'openNow': true,
-          'includedType': 'restaurant',
+          'includedType': query,
           'strictTypeFiltering': true,
           'rankPreference': 'DISTANCE',
           'locationBias': {
@@ -103,11 +104,7 @@ class ApiClient {
     }
   }
 
-  Future<List<Restaurant>> fetchSampleRestaurants({
-    int? radius,
-    double? latitude,
-    double? longitude,
-  }) async {
+  Future<List<Restaurant>> fetchSampleRestaurants() async {
     var res = await rootBundle.loadString(
       'test/fixtures/test_request_data.json',
     );
