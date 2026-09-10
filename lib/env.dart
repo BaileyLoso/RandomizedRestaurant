@@ -9,6 +9,9 @@ abstract class Env {
   @EnviedField(varName: 'BASE_URL')
   static final String baseUrl = _Env.baseUrl;
 
-  @EnviedField(varName: 'RESTAURANTS_URL')
-  static final String restaurantsUrl = _Env.restaurantsUrl;
+  @EnviedField(varName: 'TEXT_SEARCH_URL')
+  static final String textSearchUrl = _Env.textSearchUrl;
+
+  @EnviedField(varName: 'NEARBY_SEARCH_URL')
+  static final String nearbySearchUrl = _Env.nearbySearchUrl;
 }

@@ -21,14 +21,14 @@ void main() {
 
   test('Client parses restaurants from a successful response', () async {
     dioAdapter.onPost(
-      Env.restaurantsUrl,
+      Env.textSearchUrl,
       (server) => server.reply(200, {
         'places': [restaurantOne, restaurantTwo, restaurantThree],
       }),
       data: Matchers.any,
     );
 
-    final List<Restaurant> result = await client.fetchNearbyRestaurants(
+    final List<Restaurant> result = await client.fetchRestaurantsText(
       radius: 1000,
       latitude: 45.02608885433202,
       longitude: -93.19208827866116,
@@ -45,13 +45,13 @@ void main() {
 
   test('Client returns an empty list on API error', () async {
     dioAdapter.onPost(
-      Env.restaurantsUrl,
+      Env.textSearchUrl,
       (server) => server.throws(
         500,
         DioException(
-          requestOptions: RequestOptions(path: Env.restaurantsUrl),
+          requestOptions: RequestOptions(path: Env.textSearchUrl),
           response: Response(
-            requestOptions: RequestOptions(path: Env.restaurantsUrl),
+            requestOptions: RequestOptions(path: Env.textSearchUrl),
             statusCode: 500,
           ),
         ),
@@ -59,7 +59,7 @@ void main() {
       data: Matchers.any,
     );
 
-    final List<Restaurant> result = await client.fetchNearbyRestaurants(
+    final List<Restaurant> result = await client.fetchRestaurantsText(
       radius: 1000,
       latitude: 45.02608885433202,
       longitude: -93.19208827866116,

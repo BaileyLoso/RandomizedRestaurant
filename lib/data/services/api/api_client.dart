@@ -13,7 +13,45 @@ class ApiClient {
   ApiClient({Dio? dio})
     : _client = dio ?? Dio(BaseOptions(connectTimeout: Duration(seconds: 10)));
 
-  Future<List<Restaurant>> fetchNearbyRestaurants({
+  Future<List<Restaurant>> fetchRestaurantsNearby({
+    required int radius,
+    double latitude = 44.97481647788996,
+    double longitude = -93.26898500057966,
+    Set<String> types = const {'restaurant'},
+  }) async {
+    try {
+      final response = await _client.postUri(
+        Uri.parse(Env.nearbySearchUrl),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos,places.primaryTypeDisplayName,places.types,places.currentOpeningHours,places.currentSecondaryOpeningHours,places.priceLevel,places.priceRange,places.rating,places.userRatingCount',
+            'X-Goog-Api-Key': Env.apiKey,
+          },
+        ),
+        data: {
+          'includedTypes': types.toList(),
+          'excludedPrimaryTypes': ['convenience_store, gas_station, supermarket, grocery_store, health_food_store, food_store'],
+          'strictTypeFiltering': true,
+          'locationRestriction': {
+            'circle': {
+              'center': {'latitude': latitude, 'longitude': longitude},
+              'radius': radius,
+            },
+          },
+        },
+      );
+
+      var res = response.data['places'] as List;
+      var list = res.map((json) => Restaurant.fromPlacesApiJson(json)).toList();
+      return list;
+    } catch (err) {
+      print('API error: $err');
+      return [];
+    }
+  }
+
+  Future<List<Restaurant>> fetchRestaurantsText({
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
@@ -21,7 +59,7 @@ class ApiClient {
   }) async {
     try {
       final response = await _client.postUri(
-        Uri.parse(Env.restaurantsUrl),
+        Uri.parse(Env.textSearchUrl),
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -91,7 +129,7 @@ class ApiClient {
   }) async {
     try {
       final response = await _client.postUri(
-        Uri.parse(Env.restaurantsUrl),
+        Uri.parse(Env.textSearchUrl),
         options: Options(
           headers: {
             'Content-Type': 'application/json',

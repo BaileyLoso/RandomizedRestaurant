@@ -6,7 +6,7 @@ import 'package:randomized_restaurant/models/restaurant.dart';
 void main() {
   test('Client can request basic API data', () async {
     final client = ApiClient();
-    List<Restaurant> r = await client.fetchNearbyRestaurants(
+    List<Restaurant> r = await client.fetchRestaurantsText(
       radius: 1000,
       latitude: 45.02608885433202,
       longitude: -93.19208827866116,
