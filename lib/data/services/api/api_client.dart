@@ -55,7 +55,6 @@ class ApiClient {
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
-    int pageSize = 20,
   }) async {
     try {
       final response = await _client.postUri(
@@ -69,7 +68,7 @@ class ApiClient {
         ),
         data: {
           'textQuery': 'restaurant',
-          'pageSize': pageSize,
+          'pageSize': 20,
           'openNow': true,
           'includedType': 'restaurant',
           'strictTypeFiltering': true,
@@ -108,7 +107,6 @@ class ApiClient {
     int? radius,
     double? latitude,
     double? longitude,
-    double? pageSize,
   }) async {
     var res = await rootBundle.loadString(
       'test/fixtures/test_request_data.json',
