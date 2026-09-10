@@ -16,18 +16,30 @@ class RestaurantRepository extends _$RestaurantRepository {
 
   RestaurantRepository();
 
-  Future<void> fetchRestaurants({
+  Future<void> fetchRestaurantsNearby({
     int radius = 5000,
     required double latitude,
     required double longitude,
-    int pageSize = 20,
+    required Set types,
   }) async {
-    var r = await _client.fetchSampleRestaurants(
-      radius: radius,
-      latitude: latitude,
-      longitude: longitude,
-      pageSize: 20,
-    );
+    var r = await _client.fetchSampleRestaurants(); // Temporary dummy function
+
+    if (!ref.mounted) {
+      return;
+    }
+    r.shuffle();
+    state = r;
+    _index = 0;
+  }
+
+  /// Fetches a list of restaurants from a provided
+  Future<void> fetchRestaurantsText({
+    int radius = 5000,
+    required double latitude,
+    required double longitude,
+    String restaurantType = '',
+  }) async {
+    var r = await _client.fetchSampleRestaurants();
     if (!ref.mounted) {
       return;
     }
