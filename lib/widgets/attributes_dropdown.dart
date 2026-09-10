@@ -8,6 +8,7 @@ class AttributesDropdown extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = TextTheme.of(context);
+    final style = ColorScheme.of(context);
     final flags = ref
         .read(resultViewModelProvider)
         .pickedRestaurant
@@ -37,7 +38,17 @@ class AttributesDropdown extends ConsumerWidget {
               spacing: 8,
               runSpacing: 8,
               children: flags
-                  .map((flag) => Chip(label: Text(flag.label)))
+                  .map(
+                    (flag) => Chip(
+                      label: Text(
+                        flag.label,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: style.onTertiaryContainer,
+                        ),
+                      ),
+                      backgroundColor: style.tertiaryContainer,
+                    ),
+                  )
                   .toList(),
             ),
           ),
