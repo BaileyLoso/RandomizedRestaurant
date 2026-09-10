@@ -41,7 +41,7 @@ final class ResultViewModelProvider
   }
 }
 
-String _$resultViewModelHash() => r'48f9698cbba675b2626a845122539e41e0d99fee';
+String _$resultViewModelHash() => r'ee34ae8e098be4212aa7663f20d114b28e79991d';
 
 abstract class _$ResultViewModel extends $Notifier<RandomizerState> {
   RandomizerState build();
@@ -94,7 +94,7 @@ final class ResultPhotoViewModelProvider
 }
 
 String _$resultPhotoViewModelHash() =>
-    r'152a3d38805c0ff6fc417f57d9aa5eaf6af5670f';
+    r'608812c511bb3642b3921d6d186537ff26a6e1dc';
 
 abstract class _$ResultPhotoViewModel extends $Notifier<Photo?> {
   Photo? build();

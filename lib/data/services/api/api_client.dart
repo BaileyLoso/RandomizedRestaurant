@@ -140,4 +140,12 @@ class ApiClient {
       return Photo(name: '', uri: '');
     }
   }
+
+  Future<Photo> fetchSamplePhoto(String photoName) async {
+    final res = await _client.get(
+      'https://cataas.com/cat/says/Hello%20World?position=center&json=true&font=Impact&fontSize=50&fontColor=%23fff&fontBackground=none',
+    );
+    final json = {'name': photoName, 'photoUri': res.data['url']};
+    return Photo.fromPhotoJson(json);
+  }
 }

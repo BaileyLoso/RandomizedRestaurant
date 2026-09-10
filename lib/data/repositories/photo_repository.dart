@@ -17,11 +17,14 @@ class PhotoRepository extends _$PhotoRepository {
   @override
   Map<String, PhotoCacheEntry> build() => {};
 
-  Future<Photo> photo(String name) async {
+  Future<Photo> photo(String name, {bool? debug}) async {
     final cached = state[name];
     final isStale =
         cached == null ||
         DateTime.now().difference(cached.accessTime).inDays >= 1;
+    if (isStale && debug != null && debug) {
+      return await _requestSamplePhoto(name);
+    }
     if (isStale) {
       return await _requestPhoto(name);
     }
@@ -30,6 +33,12 @@ class PhotoRepository extends _$PhotoRepository {
 
   Future<Photo> _requestPhoto(String photoName) async {
     var photo = await _client.fetchPhoto(photoName);
+    state = {...state, photoName: PhotoCacheEntry(photo, DateTime.now())};
+    return photo;
+  }
+
+  Future<Photo> _requestSamplePhoto(String photoName) async {
+    var photo = await _client.fetchSamplePhoto(photoName);
     state = {...state, photoName: PhotoCacheEntry(photo, DateTime.now())};
     return photo;
   }

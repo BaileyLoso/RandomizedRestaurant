@@ -32,7 +32,7 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
     if (restaurant == null) {
       return const Center(child: Text('No restaurants found'));
     }
-    ref.read(resultPhotoViewModelProvider.notifier).mainPhoto();
+    ref.read(resultPhotoViewModelProvider.notifier).mainPhoto(debug: true);
 
     return Column(
       mainAxisAlignment: .start,

@@ -83,17 +83,21 @@ class ResultPhotoViewModel extends _$ResultPhotoViewModel {
   @override
   Photo? build() => Photo(name: '', uri: '');
 
-  Future<Photo?> mainPhoto() async {
+  Future<Photo?> mainPhoto({bool? debug}) async {
     final picked = ref.watch(
       resultViewModelProvider.select((state) => state.pickedRestaurant),
     ); // Gets the picked restaurant
     if (picked == null) {
       return null;
     }
-    return await ref
-        .read(photoRepositoryProvider.notifier)
-        .photo(
-          picked.photo.name,
-        ); // Get photo from photo repository with the same name
+    return (debug != null && debug)
+        ? ref
+              .read(photoRepositoryProvider.notifier)
+              .photo(picked.photo.name, debug: true)
+        : ref
+              .read(photoRepositoryProvider.notifier)
+              .photo(
+                picked.photo.name,
+              ); // Get photo from photo repository with the same name
   }
 }

@@ -41,7 +41,7 @@ final class PhotoRepositoryProvider
   }
 }
 
-String _$photoRepositoryHash() => r'30daa2614abe2e019df836299bd1d4e6b8aa5304';
+String _$photoRepositoryHash() => r'86965ed94206397c5475725bca32dc43a02a9d6d';
 
 abstract class _$PhotoRepository
     extends $Notifier<Map<String, PhotoCacheEntry>> {
