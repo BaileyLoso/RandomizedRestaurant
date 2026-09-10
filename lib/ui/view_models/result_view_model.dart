@@ -37,6 +37,37 @@ class ResultViewModel extends _$ResultViewModel {
     return RandomizerState(candidates: candidates);
   }
 
+  Future<void> loadNearby({double? latitude, double? longitude, Set? categories}) async {
+    state = state.copyWith(isLoading: true);
+    Restaurant? pickedRestaurant;
+
+    if (state.candidates.isNotEmpty) {
+      pickedRestaurant = ref
+          .read(restaurantRepositoryProvider.notifier)
+          .select();
+    } else {
+      await ref
+          .read(restaurantRepositoryProvider.notifier)
+          .fetchRestaurantsNearby(
+            latitude: latitude ?? 0,
+            longitude: longitude ?? 0,
+            types: categories ?? {},
+          );
+
+      if (!ref.mounted) {
+        return;
+      }
+      pickedRestaurant = ref
+          .read(restaurantRepositoryProvider.notifier)
+          .select();
+    }
+
+    state = state.copyWith(
+      isLoading: false,
+      pickedRestaurant: pickedRestaurant,
+    );
+  }
+
   Future<void> load({double? latitude, double? longitude}) async {
     state = state.copyWith(isLoading: true);
     Restaurant? pickedRestaurant;
@@ -47,7 +78,10 @@ class ResultViewModel extends _$ResultViewModel {
     } else {
       await ref
           .read(restaurantRepositoryProvider.notifier)
-          .fetchRestaurants(latitude: latitude ?? 0, longitude: longitude ?? 0);
+          .fetchRestaurantsText(
+            latitude: latitude ?? 0,
+            longitude: longitude ?? 0,
+          );
 
       if (!ref.mounted) {
         return;
