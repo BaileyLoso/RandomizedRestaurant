@@ -21,9 +21,38 @@ enum AtmosphereFlag {
   servesDessert(bit: 1 << 16, label: 'Serves Dessert'),
   servesCocktails(bit: 1 << 17, label: 'Serves Cocktails'),
   servesWine(bit: 1 << 18, label: 'Serves Wine'),
-  servesBeer(bit: 1 << 19, label: 'Serves Beer');
+  servesBeer(bit: 1 << 19, label: 'Serves Beer'),
+
+  /// Used when [stringToFlag] is given a malformed input
+  undefined(bit: 1 << 32, label: 'Undefined');  
 
   const AtmosphereFlag({required this.bit, required this.label});
+
+  static AtmosphereFlag stringToFlag(String label) {
+    AtmosphereFlag flag = switch (label) {
+      'takeout' => .takeout,
+      'delivery' => .delivery,
+      'dineIn' => .dineIn,
+      'reservable' => .reservable,
+      'goodForGroups' => .goodForGroups,
+      'outdoorSeating' => .outdoorSeating,
+      'liveMusic' => .liveMusic,
+      'allowsDogs' => .allowsDogs,
+      'goodForChildren' => .goodForChildren,
+      'servesVegetarianFood' => .servesVegetarianFood,
+      'servesBreakfast' => .servesBreakfast,
+      'servesLunch' => .servesLunch,
+      'servesBrunch' => .servesBrunch,
+      'servesDinner' => .servesDinner,
+      'servesCoffee' => .servesCoffee,
+      'servesDessert' => .servesDessert,
+      'servesCocktails' => .servesCocktails,
+      'servesWine' => .servesWine,
+      'servesBeer' => .servesBeer,
+      _ => .undefined
+    }; 
+    return flag;
+  }
 
   final int bit;
   final String label;
