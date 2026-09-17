@@ -42,7 +42,7 @@ final class RestaurantRepositoryProvider
 }
 
 String _$restaurantRepositoryHash() =>
-    r'73eb8e9c97bb838d3ed9758682615e91ad44328b';
+    r'298eec61cf4a9880e8563e46439365a97a68a8e3';
 
 abstract class _$RestaurantRepository extends $Notifier<List<Restaurant>> {
   List<Restaurant> build();
