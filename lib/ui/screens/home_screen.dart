@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:randomized_restaurant/widgets/filter_overlay.dart';
 import 'package:randomized_restaurant/widgets/randomize_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +9,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Center(child: const Text('Restaurant Randomizer'))),
-      body: Center(child: RandomizeButton()),
+      body: Center(
+        child: Column(
+          spacing: 16,
+          children: [RandomizeButton(), FilterOverlay()],
+        ),
+      ),
     );
   }
 }
