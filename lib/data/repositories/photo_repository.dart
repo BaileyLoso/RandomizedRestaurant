@@ -23,7 +23,7 @@ class PhotoRepository extends _$PhotoRepository {
         cached == null ||
         DateTime.now().difference(cached.accessTime).inDays >= 1;
     if (isStale && debug != null && debug) {
-      return await _requestSamplePhoto(name);
+      return await _requestPhoto(name);
     }
     if (isStale) {
       return await _requestPhoto(name);

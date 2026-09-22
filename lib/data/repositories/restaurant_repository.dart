@@ -1,4 +1,5 @@
 import 'package:randomized_restaurant/data/services/api/api_client.dart';
+import 'package:randomized_restaurant/models/categories.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,9 +21,14 @@ class RestaurantRepository extends _$RestaurantRepository {
     int radius = 5000,
     required double latitude,
     required double longitude,
-    required Set types,
+    required Set<FoodCategory> types,
   }) async {
-    var r = await _client.fetchSampleRestaurants(); // Temporary dummy function
+    var r = await _client.fetchRestaurantsNearby(
+      latitude: latitude,
+      longitude: longitude,
+      radius: radius,
+      types: types,
+    );
 
     if (!ref.mounted) {
       return;
@@ -37,9 +43,14 @@ class RestaurantRepository extends _$RestaurantRepository {
     int radius = 5000,
     required double latitude,
     required double longitude,
-    String restaurantType = '',
+    FoodCategory? restaurantType,
   }) async {
-    var r = await _client.fetchSampleRestaurants();
+    var r = await _client.fetchRestaurantsText(
+      latitude: latitude,
+      longitude: longitude,
+      type: restaurantType,
+      radius: radius,
+    );
     if (!ref.mounted) {
       return;
     }
