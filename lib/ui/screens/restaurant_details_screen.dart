@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 import 'package:randomized_restaurant/widgets/attributes_dropdown.dart';
@@ -47,22 +48,44 @@ class _RestaurantDetailsScreenState
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.all(0),
+        padding: .all(0),
         children: [
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: double.maxFinite,
+              maxWidth: .maxFinite,
               maxHeight: MediaQuery.heightOf(context) * 0.4,
             ),
-            child: ResultPhoto(name: restaurant!.photo.name),
+            child: Stack(
+              children: [
+                ResultPhoto(name: restaurant!.photo.name),
+                Positioned(
+                  left: 16,
+                  bottom: 16,
+                  child: Padding(
+                    // Required padding for GoogleMaps logo
+                    padding: const .only(
+                      left: 10,
+                      right: 10,
+                      top: 10,
+                      bottom: 5,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/Google_Maps_Attribution_Assets/GoogleMaps_Logo_White/GoogleMaps_Logo_White.svg',
+                      semanticsLabel: 'GoogleMaps attribution image',
+                      height: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Padding(
-            padding: EdgeInsetsGeometry.all(8.0),
+            padding: .all(8.0),
             child: Align(
-              alignment: AlignmentGeometry.centerLeft,
+              alignment: .centerLeft,
               child: Column(
                 spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   Text(
                     restaurant.name,
@@ -71,7 +94,7 @@ class _RestaurantDetailsScreenState
                     ),
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: .center,
                     children: [
                       RichText(
                         text: TextSpan(
