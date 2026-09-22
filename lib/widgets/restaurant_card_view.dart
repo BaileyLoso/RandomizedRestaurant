@@ -81,7 +81,7 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                               bottom: 5,
                             ),
                             child: SvgPicture.asset(
-                              'assets/Google_Maps_Attribution_Assets/GoogleMaps_Logo_WithDarkOutline/GoogleMaps_Logo_WithDarkOutline.svg',
+                              'assets/Google_Maps_Attribution_Assets/GoogleMaps_Logo_White/GoogleMaps_Logo_White.svg',
                               semanticsLabel: 'GoogleMaps attribution image',
                               height: 16,
                             ),
