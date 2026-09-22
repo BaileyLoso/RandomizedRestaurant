@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
-import 'package:randomized_restaurant/widgets/ratings_bar.dart';
-import 'package:randomized_restaurant/widgets/result_photo.dart';
+import 'package:randomized_restaurant/ui/widgets/ratings_bar.dart';
+import 'package:randomized_restaurant/ui/widgets/result_photo.dart';
 
 class RestaurantCardView extends ConsumerStatefulWidget {
   const RestaurantCardView({super.key});

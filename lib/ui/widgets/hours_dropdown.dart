@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 import 'package:randomized_restaurant/utils/minutes_to_time_of_day.dart';
-import 'package:randomized_restaurant/widgets/operating_hours_card.dart';
+import 'package:randomized_restaurant/ui/widgets/operating_hours_card.dart';
 
 class HoursDropdown extends ConsumerWidget {
   const HoursDropdown({super.key});

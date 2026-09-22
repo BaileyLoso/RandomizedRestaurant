@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/widgets/filter_overlay.dart';
-import 'package:randomized_restaurant/widgets/randomize_button.dart';
+import 'package:randomized_restaurant/ui/widgets/filter_overlay.dart';
+import 'package:randomized_restaurant/ui/widgets/randomize_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

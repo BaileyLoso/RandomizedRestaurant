@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
-import 'package:randomized_restaurant/widgets/attributes_dropdown.dart';
-import 'package:randomized_restaurant/widgets/hours_dropdown.dart';
-import 'package:randomized_restaurant/widgets/result_photo.dart';
+import 'package:randomized_restaurant/ui/widgets/attributes_dropdown.dart';
+import 'package:randomized_restaurant/ui/widgets/hours_dropdown.dart';
+import 'package:randomized_restaurant/ui/widgets/result_photo.dart';
 
 import '../../utils/string_helpers.dart';
 
