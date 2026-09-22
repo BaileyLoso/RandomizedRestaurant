@@ -22,6 +22,9 @@ class _FilterOverlayState extends ConsumerState<FilterOverlay> {
     final notifier = ref.watch(filterRepositoryProvider.notifier);
     filterOverlay = OverlayEntry(
       builder: (BuildContext context) {
+        final theme = ColorScheme.of(context);
+        final textTheme = TextTheme.of(context);
+
         return Stack(
           children: [
             ModalBarrier(
@@ -41,6 +44,8 @@ class _FilterOverlayState extends ConsumerState<FilterOverlay> {
                     mainAxisSize: .min,
                     children: [
                       Row(
+                        crossAxisAlignment: .center,
+                        mainAxisAlignment: .center,
                         children: [
                           Expanded(
                             child: Align(
@@ -51,19 +56,33 @@ class _FilterOverlayState extends ConsumerState<FilterOverlay> {
                               ),
                             ),
                           ),
-                          const Text('Filters'),
+                          Text(
+                            'Filters',
+                            style: textTheme.headlineMedium?.copyWith(
+                              color: theme.onSurface,
+                            ),
+                          ),
                           Expanded(
                             child: Align(
-                              alignment: .centerRight,
+                              alignment: .topRight,
                               child: TextButton(
                                 onPressed: notifier.clear,
-                                child: const Text('Reset'),
+                                child: Text(
+                                  'Reset',
+                                  style: textTheme.labelLarge?.copyWith(
+                                    color: theme.onSurface,
+                                    fontWeight: .bold,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const Divider(),
+                      const DividerTheme(
+                        data: DividerThemeData(space: 0),
+                        child: Divider(),
+                      ),
                       const SizedBox(height: 16),
                       Expanded(
                         child: Stack(
