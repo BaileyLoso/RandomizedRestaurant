@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
 import 'package:randomized_restaurant/data/repositories/photo_repository.dart';
 import 'package:randomized_restaurant/data/repositories/restaurant_repository.dart';
+import 'package:randomized_restaurant/models/categories.dart';
 import 'package:randomized_restaurant/models/photo.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -37,30 +40,58 @@ class ResultViewModel extends _$ResultViewModel {
     return RandomizerState(candidates: candidates);
   }
 
-  Future<void> loadNearby({double? latitude, double? longitude, Set? categories}) async {
+  Future<void> load() async {
+    final filters = ref.read(filterRepositoryProvider);
+    var serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return;
+    }
+
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return;
+      }
+    }
+
+    Position coords = await Geolocator.getCurrentPosition();
+
+    if (filters.length > 1) {
+      await loadNearby(
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        categories: filters,
+      );
+    } else {
+      await loadTextSearch(
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      );
+    }
+  }
+
+  Future<void> loadNearby({
+    double? latitude,
+    double? longitude,
+    Set<FoodCategory>? categories,
+  }) async {
     state = state.copyWith(isLoading: true);
     Restaurant? pickedRestaurant;
 
-    if (state.candidates.isNotEmpty) {
-      pickedRestaurant = ref
-          .read(restaurantRepositoryProvider.notifier)
-          .select();
-    } else {
-      await ref
-          .read(restaurantRepositoryProvider.notifier)
-          .fetchRestaurantsNearby(
-            latitude: latitude ?? 0,
-            longitude: longitude ?? 0,
-            types: categories ?? {},
-          );
+    await ref
+        .read(restaurantRepositoryProvider.notifier)
+        .fetchRestaurantsNearby(
+          latitude: latitude ?? 0,
+          longitude: longitude ?? 0,
+          types: categories ?? {},
+        );
 
-      if (!ref.mounted) {
-        return;
-      }
-      pickedRestaurant = ref
-          .read(restaurantRepositoryProvider.notifier)
-          .select();
+    if (!ref.mounted) {
+      return;
     }
+    pickedRestaurant = ref.read(restaurantRepositoryProvider.notifier).select();
 
     state = state.copyWith(
       isLoading: false,
@@ -68,28 +99,23 @@ class ResultViewModel extends _$ResultViewModel {
     );
   }
 
-  Future<void> load({double? latitude, double? longitude}) async {
+  Future<void> loadTextSearch({double? latitude, double? longitude}) async {
     state = state.copyWith(isLoading: true);
     Restaurant? pickedRestaurant;
-    if (state.candidates.isNotEmpty) {
-      pickedRestaurant = ref
-          .read(restaurantRepositoryProvider.notifier)
-          .select();
-    } else {
-      await ref
-          .read(restaurantRepositoryProvider.notifier)
-          .fetchRestaurantsText(
-            latitude: latitude ?? 0,
-            longitude: longitude ?? 0,
-          );
+    final category = ref.read(filterRepositoryProvider);
 
-      if (!ref.mounted) {
-        return;
-      }
-      pickedRestaurant = ref
-          .read(restaurantRepositoryProvider.notifier)
-          .select();
+    await ref
+        .read(restaurantRepositoryProvider.notifier)
+        .fetchRestaurantsText(
+          latitude: latitude ?? 0,
+          longitude: longitude ?? 0,
+          restaurantType: category.isNotEmpty ? category.first : null,
+        );
+
+    if (!ref.mounted) {
+      return;
     }
+    pickedRestaurant = ref.read(restaurantRepositoryProvider.notifier).select();
 
     state = state.copyWith(
       isLoading: false,
