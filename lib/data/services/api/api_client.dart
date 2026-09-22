@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:randomized_restaurant/env.dart';
+import 'package:randomized_restaurant/models/categories.dart';
 import 'package:randomized_restaurant/models/restaurant.dart';
 import 'package:randomized_restaurant/models/photo.dart';
 
@@ -13,11 +14,50 @@ class ApiClient {
   ApiClient({Dio? dio})
     : _client = dio ?? Dio(BaseOptions(connectTimeout: Duration(seconds: 10)));
 
+  static const String _placeFields =
+      'places.id,'
+      'places.displayName,'
+      'places.types,'
+      'places.formattedAddress,'
+      'places.photos,'
+      'places.primaryType,'
+      'places.primaryTypeDisplayName,'
+      'places.location,'
+      'places.currentOpeningHours,'
+      'places.currentSecondaryOpeningHours,'
+      'places.priceLevel,'
+      'places.priceRange,'
+      'places.rating,'
+      'places.userRatingCount,'
+      'places.editorialSummary,'
+      'places.generativeSummary,'
+      'places.websiteUri,'
+      'places.nationalPhoneNumber,'
+      'places.takeout,'
+      'places.delivery,'
+      'places.dineIn,'
+      'places.reservable,'
+      'places.goodForGroups,'
+      'places.outdoorSeating,'
+      'places.liveMusic,'
+      'places.allowsDogs,'
+      'places.goodForChildren,'
+      'places.servesVegetarianFood,'
+      'places.servesBreakfast,'
+      'places.servesLunch,'
+      'places.servesBrunch,'
+      'places.servesDinner,'
+      'places.servesCoffee,'
+      'places.servesDessert,'
+      'places.servesCocktails,'
+      'places.servesWine,'
+      'places.servesBeer';
+
   Future<List<Restaurant>> fetchRestaurantsNearby({
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
-    Set<String> types = const {},
+    Set<FoodCategory> types = const {},
   }) async {
     try {
       final response = await _client.postUri(
@@ -25,14 +65,22 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos,places.primaryTypeDisplayName,places.types,places.currentOpeningHours,places.currentSecondaryOpeningHours,places.priceLevel,places.priceRange,places.rating,places.userRatingCount',
+            'X-Goog-FieldMask': _placeFields,
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
         data: {
-          'includedTypes': types.isNotEmpty ? types.toList() : {'restaurant'},
-          'excludedPrimaryTypes': ['convenience_store, gas_station, supermarket, grocery_store, health_food_store, food_store'],
-          'strictTypeFiltering': true,
+          'includedTypes': types.isNotEmpty
+              ? types.map((t) => t.id).toList()
+              : ['restaurant'],
+          'excludedPrimaryTypes': [
+            'convenience_store',
+            'gas_station',
+            'supermarket',
+            'grocery_store',
+            'health_food_store',
+            'food_store',
+          ],
           'locationRestriction': {
             'circle': {
               'center': {'latitude': latitude, 'longitude': longitude},
@@ -55,7 +103,7 @@ class ApiClient {
     required int radius,
     double latitude = 44.97481647788996,
     double longitude = -93.26898500057966,
-    String query = ''
+    FoodCategory? type,
   }) async {
     try {
       final response = await _client.postUri(
@@ -63,15 +111,15 @@ class ApiClient {
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'nextPageToken,places.id,places.displayName,places.types,places.formattedAddress,places.photos,places.primaryTypeDisplayName,places.types,places.currentOpeningHours,places.currentSecondaryOpeningHours,places.priceLevel,places.priceRange,places.rating,places.userRatingCount',
+            'X-Goog-FieldMask': _placeFields,
             'X-Goog-Api-Key': Env.apiKey,
           },
         ),
         data: {
-          'textQuery': query != '' ? query.replaceAll('_', ' ') : 'restaurant',
+          'textQuery': type != null ? type.label : 'restaurant',
           'pageSize': 20,
           'openNow': true,
-          'includedType': query,
+          if (type != null) 'includedType': type.id,
           'strictTypeFiltering': true,
           'rankPreference': 'DISTANCE',
           'locationBias': {
