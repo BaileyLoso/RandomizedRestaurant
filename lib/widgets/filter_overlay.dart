@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
+import 'package:randomized_restaurant/widgets/apply_button.dart';
 import 'package:randomized_restaurant/widgets/filter_search_container.dart';
 
 class FilterOverlay extends ConsumerStatefulWidget {
@@ -64,7 +65,20 @@ class _FilterOverlayState extends ConsumerState<FilterOverlay> {
                       ),
                       const Divider(),
                       const SizedBox(height: 16),
-                      const Expanded(child: FilterSearchContainer()),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            const FilterSearchContainer(),
+                            Align(
+                              alignment: .bottomCenter,
+                              child: Padding(
+                                padding: const .directional(bottom: 16),
+                                child: ApplyButton(onPressed: _hideOverlay),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
