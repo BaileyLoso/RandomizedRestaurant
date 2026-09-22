@@ -12,7 +12,6 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    // TODO fix scaling of toolbar icons
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
