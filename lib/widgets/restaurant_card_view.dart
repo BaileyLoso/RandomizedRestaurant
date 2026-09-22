@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
 import 'package:randomized_restaurant/widgets/ratings_bar.dart';
@@ -63,29 +64,62 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                       ),
                     ),
                     Positioned(
+                      left: 16,
                       right: 16,
                       bottom: 16,
-                      width: min(MediaQuery.widthOf(context) * 0.4, 120),
-                      child: FittedBox(
-                        fit: .fill,
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'More details ',
-                            style: textTheme.bodyLarge?.copyWith(
-                              color: detailsColor,
+                      child: Row(
+                        mainAxisAlignment: .spaceBetween,
+                        crossAxisAlignment: .end,
+                        spacing: 16,
+                        children: [
+                          Padding(
+                            // Required padding for GoogleMaps logo
+                            padding: const .only(
+                              left: 10,
+                              right: 10,
+                              top: 10,
+                              bottom: 5,
                             ),
-                            children: [
-                              WidgetSpan(
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  size: textTheme.bodyLarge?.fontSize,
-                                  color: detailsColor,
-                                  applyTextScaling: true,
+                            child: SvgPicture.asset(
+                              'assets/Google_Maps_Attribution_Assets/GoogleMaps_Logo_WithDarkOutline/GoogleMaps_Logo_WithDarkOutline.svg',
+                              semanticsLabel: 'GoogleMaps attribution image',
+                              height: 16,
+                            ),
+                          ),
+                          Flexible(
+                            child: SizedBox(
+                              width: min(
+                                MediaQuery.widthOf(context) * 0.6,
+                                120,
+                              ),
+                              child: Padding(
+                                padding: const .only(bottom: 5, top: 10),
+                                child: FittedBox(
+                                  fit: .scaleDown,
+                                  alignment: .centerRight,
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'More details ',
+                                      style: textTheme.bodyLarge?.copyWith(
+                                        color: detailsColor,
+                                      ),
+                                      children: [
+                                        WidgetSpan(
+                                          child: Icon(
+                                            Icons.arrow_forward,
+                                            size: textTheme.bodyLarge?.fontSize,
+                                            color: detailsColor,
+                                            applyTextScaling: true,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],
@@ -99,7 +133,6 @@ class _RestaurantCardViewState extends ConsumerState<RestaurantCardView> {
                   children: [
                     Padding(
                       padding: .all(0),
-
                       child: Text(
                         restaurant.name,
                         style: textTheme.headlineSmall?.copyWith(
