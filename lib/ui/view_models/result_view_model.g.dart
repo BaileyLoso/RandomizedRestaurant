@@ -41,7 +41,7 @@ final class ResultViewModelProvider
   }
 }
 
-String _$resultViewModelHash() => r'b9656214536dfc05f3aa064c9715c945cbbd82ac';
+String _$resultViewModelHash() => r'5685c48a11b99eb9b61a2a09d42627e3be0c6277';
 
 abstract class _$ResultViewModel extends $Notifier<RandomizerState> {
   RandomizerState build();
