@@ -25,6 +25,7 @@ class Restaurant {
   final ({String startPrice, String endPrice}) priceRange;
   final String summary;
   final String websiteUri;
+  final String googleMapsUri;
   final String phoneNumber;
   final List<AtmosphereFlag> atmosphereFlags;
 
@@ -51,6 +52,7 @@ class Restaurant {
     required this.priceRange,
     required this.summary,
     required this.websiteUri,
+    required this.googleMapsUri,
     required this.phoneNumber,
     required this.atmosphereFlags,
     this.photo = (name: '', width: 0, height: 0),
@@ -89,6 +91,7 @@ class Restaurant {
         _ => '',
       },
       websiteUri: json['websiteUri'] as String? ?? '',
+      googleMapsUri: json['googleMapsUri'] as String? ?? '',
       atmosphereFlags: Atmosphere.fromPlacesApiJson(json).activeFlags,
       phoneNumber: json['nationalPhoneNumber'] as String? ?? '',
       photos:
