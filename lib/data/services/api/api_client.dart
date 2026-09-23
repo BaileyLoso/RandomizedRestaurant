@@ -223,7 +223,9 @@ class ApiClient {
           },
         ),
       );
-      return Restaurant.fromPlacesApiJson(response.data as Map<String, dynamic>);
+      return Restaurant.fromPlacesApiJson(
+        response.data as Map<String, dynamic>,
+      );
     } catch (err) {
       print('API error: $err');
       return null;

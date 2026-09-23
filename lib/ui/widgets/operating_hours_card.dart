@@ -31,7 +31,6 @@ class OperatingHoursCard extends ConsumerWidget {
   /// The category of operating hours aside from normal business hours.
   final String? secondaryHoursType;
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = TextTheme.of(context);
@@ -45,9 +44,7 @@ class OperatingHoursCard extends ConsumerWidget {
             Center(
               child: Text(
                 'Primary Hours',
-                style: textTheme.bodyLarge?.copyWith(
-                  fontWeight: .bold,
-                ),
+                style: textTheme.bodyLarge?.copyWith(fontWeight: .bold),
               ),
             ),
             ...operatingHours.days.map((day) {
@@ -73,8 +70,7 @@ class OperatingHoursCard extends ConsumerWidget {
                             })
                             .join('\n'),
                         textAlign: .end,
-                        style: textTheme.bodyMedium?.copyWith(
-                        ),
+                        style: textTheme.bodyMedium?.copyWith(),
                       ),
                     ),
                   ],
@@ -90,14 +86,12 @@ class OperatingHoursCard extends ConsumerWidget {
       maintainState: true,
       title: Center(
         child: Text(
-              secondaryHoursType
+          secondaryHoursType
                   ?.replaceAll('_', ' ')
                   .toLowerCase()
                   .toTitleCase() ??
               '',
-          style: textTheme.bodyLarge?.copyWith(
-            fontWeight: .bold,
-          ),
+          style: textTheme.bodyLarge?.copyWith(fontWeight: .bold),
         ),
       ),
 
@@ -141,8 +135,7 @@ class OperatingHoursCard extends ConsumerWidget {
                                       .join('\n') ??
                                   '',
                               textAlign: .end,
-                              style: textTheme.bodyMedium?.copyWith(
-                              ),
+                              style: textTheme.bodyMedium?.copyWith(),
                             ),
                           ),
                         ],

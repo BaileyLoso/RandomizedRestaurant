@@ -27,7 +27,7 @@ class FilterButton extends ConsumerWidget {
       color: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
         WidgetState.selected: theme.tertiaryContainer,
         WidgetState.any: theme.surfaceContainer,
-        WidgetState.pressed: theme.tertiary
+        WidgetState.pressed: theme.tertiary,
       }),
     );
   }

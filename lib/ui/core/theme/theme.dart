@@ -346,14 +346,15 @@ class MaterialTheme {
     scaffoldBackgroundColor: colorScheme.surface,
     canvasColor: colorScheme.surface,
     expansionTileTheme: ExpansionTileThemeData(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(25)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(25),
+      ),
       backgroundColor: colorScheme.surfaceContainerHigh,
       textColor: colorScheme.onSurface,
       collapsedBackgroundColor: colorScheme.surfaceContainer,
       iconColor: colorScheme.onSurfaceVariant,
-      collapsedIconColor: colorScheme.onSurfaceVariant
-
-    )
+      collapsedIconColor: colorScheme.onSurfaceVariant,
+    ),
   );
 
   /// Rating Star
@@ -519,4 +520,3 @@ class ColorFamily {
   final Color colorContainer;
   final Color onColorContainer;
 }
-

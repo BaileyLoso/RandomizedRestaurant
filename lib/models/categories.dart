@@ -164,7 +164,7 @@ const List<FoodCategory> all = [
 ];
 
 /// A collection of popular cuisines.
-/// 
+///
 /// These exist separately to give them priority when populating the
 /// search filters buttons on the main screen.
 const List<FoodCategory> popular = [

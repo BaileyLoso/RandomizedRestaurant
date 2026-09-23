@@ -24,7 +24,7 @@ enum AtmosphereFlag {
   servesBeer(bit: 1 << 19, label: 'Serves Beer'),
 
   /// Used when [stringToFlag] is given a malformed input
-  undefined(bit: 1 << 32, label: 'Undefined');  
+  undefined(bit: 1 << 32, label: 'Undefined');
 
   const AtmosphereFlag({required this.bit, required this.label});
 
@@ -49,8 +49,8 @@ enum AtmosphereFlag {
       'servesCocktails' => .servesCocktails,
       'servesWine' => .servesWine,
       'servesBeer' => .servesBeer,
-      _ => .undefined
-    }; 
+      _ => .undefined,
+    };
     return flag;
   }
 
