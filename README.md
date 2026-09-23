@@ -37,6 +37,43 @@ Pick the kinds of food you're in the mood for (or don't, if anything works for y
 ## Limitations
 - Currently, all searches are limited to a fixed 5km radius
 - Each search returns at most 20 restaurants
+A multi-platform tool for choosing where to eat when you simply cannot choose.
+
+Pick the kinds of food you're in the mood for (or don't, if anything works for you), hit randomize, and the app finds nearby restaurants using the Google Places API and chooses one for you. Don't like the pick? Roll again.
+
+## Features
+
+- **Randomize** – picks a random nearby restaurant based on your current location
+- **Filters** – narrow results by cuisine/venue type (sourced from Google's
+  [Place Types](https://developers.google.com/maps/documentation/places/web-service/place-types#table-a))
+- **Result navigation** – step forward to a new pick or back to a previous one
+- **Restaurant details** – hours, rating, price level, amenities (dine-in, takeout, outdoor seating,
+  etc.), and a link out to Google Maps
+- **Favorites** – save restaurants you like, no account required!
+
+### Planned
+
+- User accounts for cross-device favorites
+- Adjustable search radius
+- Toggling between dark and light modes
+
+
+## Tech Stack
+
+| Area              | Package                                              |
+| ----------------- | ---------------------------------------------------- |
+| Framework         | [Flutter](https://flutter.dev)                       |
+| State management  | `flutter_riverpod` + `riverpod_generator`            |
+| Routing           | `go_router`                                          |
+| Networking        | `dio`                                                |
+| Local storage     | `drift` (SQLite)                                     |
+| Location          | `geolocator`                                         |
+| Environment/keys  | `envied`                                             |
+| Restaurant data   | [Google Places API (New)](https://developers.google.com/maps/documentation/places/web-service/overview) |
+
+## Limitations
+- Currently, all searches are limited to a fixed 5km radius
+- Each search returns at most 20 restaurants
 
 ## Getting Started
 
