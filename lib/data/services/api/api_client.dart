@@ -203,6 +203,33 @@ class ApiClient {
     }
   }
 
+  static const String _minimalPlaceFields =
+      'id,'
+      'displayName,'
+      'name,'
+      'formattedAddress,'
+      'primaryType,'
+      'googleMapsUri,';
+
+  Future<Restaurant?> restaurantById(String id) async {
+    try {
+      final response = await _client.get(
+        '${Env.baseUrl}places/$id',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Goog-FieldMask': _minimalPlaceFields,
+            'X-Goog-Api-Key': Env.apiKey,
+          },
+        ),
+      );
+      return Restaurant.fromPlacesApiJson(response.data as Map<String, dynamic>);
+    } catch (err) {
+      print('API error: $err');
+      return null;
+    }
+  }
+
   Future<Photo> fetchPhoto(String name) async {
     try {
       final response = await _client.get(
