@@ -13,6 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Create .env
+        run: |
+          cat > .env <<EOF
+          BASE_URL=https://places.googleapis.com/v1/
+          TEXT_SEARCH_URL=https://places.googleapis.com/v1/places:searchText
+          NEARBY_SEARCH_URL=https://places.googleapis.com/v1/places:searchNearby
+          API_KEY=${{ secrets.PLACES_API_KEY }}
+          EOF
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter build web --wasm
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
