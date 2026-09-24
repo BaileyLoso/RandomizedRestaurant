@@ -18,6 +18,7 @@ Pick the kinds of food you're in the mood for (or don't, if anything works for y
 
 ### Planned
 
+- Android and iOS native app releases
 - User accounts for cross-device favorites
 - Adjustable search radius
 - Toggling between dark and light modes
