@@ -13,8 +13,6 @@ class ResultPhoto extends ConsumerStatefulWidget {
 class _ResultPhotoState extends ConsumerState<ResultPhoto> {
   @override
   Widget build(BuildContext context) {
-    final ColorScheme theme = Theme.of(context).colorScheme;
-
     var photoMap = ref.watch(photoRepositoryProvider);
     var entry = photoMap[widget.name];
     return switch (entry) {
@@ -27,11 +25,10 @@ class _ResultPhotoState extends ConsumerState<ResultPhoto> {
         ),
         foregroundDecoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.transparent, theme.onSurface],
+            colors: [Colors.transparent, Colors.black],
             begin: AlignmentGeometry.center,
             end: AlignmentGeometry.bottomCenter,
           ),
-          backgroundBlendMode: BlendMode.xor,
         ),
       ),
       null => SizedBox.expand(child: Container()),
