@@ -7,10 +7,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ColorScheme.of(context);
+    final textTheme = TextTheme.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: Center(child: const Text('Restaurant Randomizer'))),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'FeastFinder',
+            style: textTheme.headlineLarge?.copyWith(color: theme.onSurface),
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
+          mainAxisAlignment: .center,
           spacing: 16,
           children: [RandomizeButton(), FilterOverlay()],
         ),
