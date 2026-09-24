@@ -15,14 +15,8 @@ class _AppNavBarState extends State<AppNavBar> {
     int currentPageIndex = 0;
 
     switch (location) {
-      case '/browse':
-        currentPageIndex = 1;
-        break;
       case '/favorites':
-        currentPageIndex = 2;
-        break;
-      case '/userProfile':
-        currentPageIndex = 3;
+        currentPageIndex = 1;
         break;
       case '/':
       default:
@@ -48,17 +42,9 @@ class _AppNavBarState extends State<AppNavBar> {
         destinations: [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(
-            icon: Icon(Icons.search_sharp),
-            label: 'Browse',
-          ),
-          NavigationDestination(
             icon: Icon(Icons.favorite_rounded),
             // icon: Badge(child: Icon(Icons.favorite_rounded)),
             label: 'Favorites',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Profile',
           ),
         ],
         onDestinationSelected: (int index) {
@@ -70,13 +56,7 @@ class _AppNavBarState extends State<AppNavBar> {
               context.goNamed('home');
               break;
             case 1:
-              context.go('browse');
-              break;
-            case 2:
               context.go('favorites');
-              break;
-            case 3:
-              context.go('userProfile');
               break;
           }
         },

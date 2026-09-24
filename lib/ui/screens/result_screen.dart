@@ -18,19 +18,6 @@ class ResultScreen extends StatelessWidget {
         centerTitle: true,
         toolbarHeight: min(MediaQuery.heightOf(context) * 0.1, 52),
         iconTheme: IconThemeData(applyTextScaling: true),
-
-        actions: [
-          Center(
-            widthFactor: 1.38,
-            child: FittedBox(
-              fit: .scaleDown,
-              child: IconButton(
-                onPressed: () => print("Not ready yet"),
-                icon: Icon(Icons.person_off_outlined),
-              ),
-            ),
-          ),
-        ],
         title: FittedBox(
           fit: .scaleDown,
           child: Text(

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:randomized_restaurant/ui/screens/browse_screen.dart';
 import 'package:randomized_restaurant/ui/screens/favorites_screen.dart';
 import 'package:randomized_restaurant/ui/screens/home_screen.dart';
-import 'package:randomized_restaurant/ui/screens/user_profile_screen.dart';
 import 'package:randomized_restaurant/ui/core/theme/theme.dart';
 import 'package:randomized_restaurant/ui/core/theme/util.dart';
 import 'package:randomized_restaurant/ui/core/shared_widgets/app_nav_bar.dart';
@@ -33,19 +31,9 @@ final _router = GoRouter(
           builder: (context, state) => ResultScreen(),
         ),
         GoRoute(
-          path: '/userProfile',
-          name: 'userProfile',
-          builder: (context, state) => UserProfileScreen(),
-        ),
-        GoRoute(
           path: '/favorites',
           name: 'favorites',
           builder: (context, state) => FavoritesScreen(),
-        ),
-        GoRoute(
-          path: '/browse',
-          name: 'browse',
-          builder: (context, state) => BrowseScreen(),
         ),
       ],
     ),
