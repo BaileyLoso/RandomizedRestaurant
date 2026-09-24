@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'FeastFinder',
+            'FeastFinders',
             style: textTheme.headlineLarge?.copyWith(color: theme.onSurface),
           ),
         ),

@@ -46,7 +46,7 @@ class RandomizeButton extends ConsumerWidget {
             },
             child: Center(
               child: Text(
-                'Feed Me Something',
+                'Find Me a New Craving',
                 style: textTheme.headlineLarge?.copyWith(
                   color: theme.onTertiaryContainer,
                 ),

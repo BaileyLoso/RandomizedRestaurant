@@ -1,8 +1,10 @@
-# Randomized Restaurant
+# [feastfinders.net](feastfinders.net) (previously known as Randomized Restaurant)
+
 
 A multi-platform tool for choosing where to eat when you simply cannot choose.
 
 Pick the kinds of food you're in the mood for (or don't, if anything works for you), hit randomize, and the app finds nearby restaurants using the Google Places API and chooses one for you. Don't like the pick? Roll again.
+
 
 ## Features
 
