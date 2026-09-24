@@ -1,4 +1,4 @@
-# [feastfinders.net](feastfinders.net) (previously known as Randomized Restaurant)
+# [feastfinders.net](restaurant-randomizer-506122.web.app) (previously known as Randomized Restaurant)
 
 
 A multi-platform tool for choosing where to eat when you simply cannot choose.
