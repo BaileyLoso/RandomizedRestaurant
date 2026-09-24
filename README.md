@@ -36,12 +36,13 @@ Pick the kinds of food you're in the mood for (or don't, if anything works for y
 | Environment/keys  | `envied`                                             |
 | Restaurant data   | [Google Places API (New)](https://developers.google.com/maps/documentation/places/web-service/overview) |
 
+## Deployment
+The web version of this app is deployed to Firebase Hosting through GitHub Actions, which can be reached at https://restaurant-randomizer-506122.web.app
+
 ## Limitations
 - Currently, all searches are limited to a fixed 5km radius
 - Each search returns at most 20 restaurants
 A multi-platform tool for choosing where to eat when you simply cannot choose.
-
-Pick the kinds of food you're in the mood for (or don't, if anything works for you), hit randomize, and the app finds nearby restaurants using the Google Places API and chooses one for you. Don't like the pick? Roll again.
 
 ## Getting Started
 
