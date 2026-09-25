@@ -43,7 +43,6 @@ The web version of this app is deployed to Firebase Hosting through GitHub Actio
 ## Limitations
 - Currently, all searches are limited to a fixed 5km radius
 - Each search returns at most 20 restaurants
-A multi-platform tool for choosing where to eat when you simply cannot choose.
 
 ## Getting Started
 
