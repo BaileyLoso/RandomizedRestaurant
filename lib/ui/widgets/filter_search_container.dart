@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
-import 'package:randomized_restaurant/models/categories.dart' as categories;
-import 'package:randomized_restaurant/ui/widgets/filter_button.dart';
+import 'package:sweep_steaks/data/repositories/filter_repository.dart';
+import 'package:sweep_steaks/models/categories.dart' as categories;
+import 'package:sweep_steaks/ui/widgets/filter_button.dart';
 
 class FilterSearchContainer extends ConsumerStatefulWidget {
   const FilterSearchContainer({super.key});

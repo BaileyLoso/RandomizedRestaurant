@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
-import 'package:randomized_restaurant/ui/widgets/apply_button.dart';
-import 'package:randomized_restaurant/ui/widgets/filter_search_container.dart';
+import 'package:sweep_steaks/data/repositories/filter_repository.dart';
+import 'package:sweep_steaks/ui/widgets/apply_button.dart';
+import 'package:sweep_steaks/ui/widgets/filter_search_container.dart';
 
 class FilterOverlay extends ConsumerStatefulWidget {
   const new({super.key});

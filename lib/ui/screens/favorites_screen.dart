@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/data/repositories/favorites_repository.dart';
-import 'package:randomized_restaurant/ui/widgets/favorite_button.dart';
-import 'package:randomized_restaurant/utils/string_helpers.dart';
+import 'package:sweep_steaks/data/repositories/favorites_repository.dart';
+import 'package:sweep_steaks/ui/widgets/favorite_button.dart';
+import 'package:sweep_steaks/utils/string_helpers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FavoritesScreen extends ConsumerWidget {

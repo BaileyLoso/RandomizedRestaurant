@@ -1,5 +1,5 @@
-import 'package:randomized_restaurant/models/atmosphere.dart';
-import 'package:randomized_restaurant/models/operating_hours.dart';
+import 'package:sweep_steaks/models/atmosphere.dart';
+import 'package:sweep_steaks/models/operating_hours.dart';
 
 enum PriceLevel {
   unspecified,

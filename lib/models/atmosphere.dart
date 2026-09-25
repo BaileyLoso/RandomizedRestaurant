@@ -1,4 +1,4 @@
-import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
 
 /// A bit representation of the possible atmosphere tags assignable to a
 /// [Restaurant].

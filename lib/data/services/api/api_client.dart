@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:randomized_restaurant/env.dart';
-import 'package:randomized_restaurant/models/categories.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
-import 'package:randomized_restaurant/models/photo.dart';
+import 'package:sweep_steaks/env.dart';
+import 'package:sweep_steaks/models/categories.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
+import 'package:sweep_steaks/models/photo.dart';
 
 // TODO: API Error handling
 class ApiClient {

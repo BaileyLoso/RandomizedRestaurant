@@ -1,6 +1,6 @@
-import 'package:randomized_restaurant/data/db/app_database.dart';
-import 'package:randomized_restaurant/data/services/api/api_client.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:sweep_steaks/data/db/app_database.dart';
+import 'package:sweep_steaks/data/services/api/api_client.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorites_repository.g.dart';

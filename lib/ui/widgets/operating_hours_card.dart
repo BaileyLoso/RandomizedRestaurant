@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/models/operating_hours.dart';
+import 'package:sweep_steaks/models/operating_hours.dart';
 
 import 'hours_dropdown.dart';
 
-import 'package:randomized_restaurant/utils/minutes_to_time_of_day.dart';
-import 'package:randomized_restaurant/utils/string_helpers.dart';
+import 'package:sweep_steaks/utils/minutes_to_time_of_day.dart';
+import 'package:sweep_steaks/utils/string_helpers.dart';
 
 /// A card view of the operating hours and corresponding weekdays for a
 /// place.

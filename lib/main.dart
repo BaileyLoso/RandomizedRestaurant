@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:randomized_restaurant/ui/screens/favorites_screen.dart';
-import 'package:randomized_restaurant/ui/screens/home_screen.dart';
-import 'package:randomized_restaurant/ui/core/theme/theme.dart';
-import 'package:randomized_restaurant/ui/core/theme/util.dart';
-import 'package:randomized_restaurant/ui/core/shared_widgets/app_nav_bar.dart';
-import 'package:randomized_restaurant/ui/screens/result_screen.dart';
-import 'package:randomized_restaurant/routing/routes.dart';
+import 'package:sweep_steaks/ui/screens/favorites_screen.dart';
+import 'package:sweep_steaks/ui/screens/home_screen.dart';
+import 'package:sweep_steaks/ui/core/theme/theme.dart';
+import 'package:sweep_steaks/ui/core/theme/util.dart';
+import 'package:sweep_steaks/ui/core/shared_widgets/app_nav_bar.dart';
+import 'package:sweep_steaks/ui/screens/result_screen.dart';
+import 'package:sweep_steaks/routing/routes.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 

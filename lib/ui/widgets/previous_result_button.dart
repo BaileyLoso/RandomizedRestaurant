@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/ui/view_models/result_view_model.dart';
+import 'package:sweep_steaks/ui/view_models/result_view_model.dart';
 
 class PreviousResultButton extends ConsumerWidget {
   const new({super.key});

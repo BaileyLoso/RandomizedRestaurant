@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
-import 'package:randomized_restaurant/models/atmosphere.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
+import 'package:sweep_steaks/models/atmosphere.dart';
 
 import '../fixtures/test_restaurants.dart' as test_restaurants;
 

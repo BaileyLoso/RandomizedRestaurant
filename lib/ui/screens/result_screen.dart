@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/ui/widgets/next_result_button.dart';
-import 'package:randomized_restaurant/ui/widgets/previous_result_button.dart';
-import 'package:randomized_restaurant/ui/widgets/restaurant_card_view.dart';
+import 'package:sweep_steaks/ui/widgets/next_result_button.dart';
+import 'package:sweep_steaks/ui/widgets/previous_result_button.dart';
+import 'package:sweep_steaks/ui/widgets/restaurant_card_view.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});

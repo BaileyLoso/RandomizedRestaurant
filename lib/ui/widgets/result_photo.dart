@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/data/repositories/photo_repository.dart';
+import 'package:sweep_steaks/data/repositories/photo_repository.dart';
 
 class ResultPhoto extends ConsumerStatefulWidget {
   final String name;

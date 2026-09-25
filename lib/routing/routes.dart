@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:randomized_restaurant/ui/screens/restaurant_details_screen.dart';
+import 'package:sweep_steaks/ui/screens/restaurant_details_screen.dart';
 
 ///TODO Navigation routing
 /// Navigation paths not named in the navigation bar

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/ui/widgets/filter_overlay.dart';
-import 'package:randomized_restaurant/ui/widgets/randomize_button.dart';
+import 'package:sweep_steaks/ui/widgets/filter_overlay.dart';
+import 'package:sweep_steaks/ui/widgets/randomize_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'FeastFinders',
+            'SweepSteaks',
             style: textTheme.headlineLarge?.copyWith(color: theme.onSurface),
           ),
         ),

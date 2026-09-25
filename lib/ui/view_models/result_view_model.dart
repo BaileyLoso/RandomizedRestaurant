@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
-import 'package:randomized_restaurant/data/repositories/photo_repository.dart';
-import 'package:randomized_restaurant/data/repositories/restaurant_repository.dart';
-import 'package:randomized_restaurant/models/categories.dart';
-import 'package:randomized_restaurant/models/photo.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:sweep_steaks/data/repositories/filter_repository.dart';
+import 'package:sweep_steaks/data/repositories/photo_repository.dart';
+import 'package:sweep_steaks/data/repositories/restaurant_repository.dart';
+import 'package:sweep_steaks/models/categories.dart';
+import 'package:sweep_steaks/models/photo.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'result_view_model.g.dart';

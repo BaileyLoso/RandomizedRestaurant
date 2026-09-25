@@ -1,6 +1,6 @@
 {
-    "name": "randomized_restaurant",
-    "short_name": "randomized_restaurant",
+    "name": "SweepSteaks",
+    "short_name": "SweepSteaks",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

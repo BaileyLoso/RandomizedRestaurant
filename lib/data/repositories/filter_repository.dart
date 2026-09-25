@@ -1,4 +1,4 @@
-import 'package:randomized_restaurant/models/categories.dart';
+import 'package:sweep_steaks/models/categories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'filter_repository.g.dart';

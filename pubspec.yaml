@@ -1,5 +1,5 @@
-name: randomized_restaurant
-description: "A new Flutter project."
+name: sweep_steaks
+description: "A multi-platform application that helps you beat decision paralysis when finding somewhere to eat."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev

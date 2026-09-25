@@ -1,5 +1,5 @@
-import 'package:randomized_restaurant/data/services/api/api_client.dart';
-import 'package:randomized_restaurant/models/photo.dart';
+import 'package:sweep_steaks/data/services/api/api_client.dart';
+import 'package:sweep_steaks/models/photo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'photo_repository.g.dart';

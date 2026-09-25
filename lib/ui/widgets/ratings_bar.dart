@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:randomized_restaurant/ui/core/theme/theme.dart';
+import 'package:sweep_steaks/ui/core/theme/theme.dart';
 
 class RatingsBar extends StatelessWidget {
   const new({

@@ -1,5 +1,5 @@
-import 'package:randomized_restaurant/models/restaurant.dart';
-import 'package:randomized_restaurant/utils/minutes_to_time_of_day.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
+import 'package:sweep_steaks/utils/minutes_to_time_of_day.dart';
 
 /// An instance containing the full operating hours of a [Restaurant] instance
 /// for an entire week.

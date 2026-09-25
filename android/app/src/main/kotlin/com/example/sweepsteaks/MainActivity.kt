@@ -1,4 +1,4 @@
-package com.example.randomized_restaurant
+package com.example.sweepsteaks
 
 import io.flutter.embedding.android.FlutterActivity
 

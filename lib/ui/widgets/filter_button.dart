@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:randomized_restaurant/data/repositories/filter_repository.dart';
-import 'package:randomized_restaurant/models/categories.dart';
+import 'package:sweep_steaks/data/repositories/filter_repository.dart';
+import 'package:sweep_steaks/models/categories.dart';
 
 class FilterButton extends ConsumerWidget {
   const new({super.key, required this.category});

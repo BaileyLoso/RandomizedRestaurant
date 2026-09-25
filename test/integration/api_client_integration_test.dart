@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:randomized_restaurant/data/services/api/api_client.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:sweep_steaks/data/services/api/api_client.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
 
 void main() {
   test('Client can request basic API data', () async {

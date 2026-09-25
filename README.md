@@ -1,4 +1,4 @@
-# [feastfinders.net](restaurant-randomizer-506122.web.app) (previously known as Randomized Restaurant)
+# [SweepSteaks](restaurant-randomizer-506122.web.app)
 
 
 A multi-platform tool for choosing where to eat when you simply cannot choose.
@@ -56,8 +56,8 @@ The web version of this app is deployed to Firebase Hosting through GitHub Actio
 1. Clone the repository and install dependencies:
 
    ```sh
-   git clone https://github.com/BaileyLoso/randomized_restaurant.git
-   cd randomized_restaurant
+   git clone https://github.com/BaileyLoso/SweepSteaks.git
+   cd SweepSteaks
    flutter pub get
    ```
 

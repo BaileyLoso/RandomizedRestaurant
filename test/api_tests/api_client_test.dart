@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
-import 'package:randomized_restaurant/data/services/api/api_client.dart';
-import 'package:randomized_restaurant/env.dart';
-import 'package:randomized_restaurant/models/restaurant.dart';
+import 'package:sweep_steaks/data/services/api/api_client.dart';
+import 'package:sweep_steaks/env.dart';
+import 'package:sweep_steaks/models/restaurant.dart';
 
 import '../fixtures/test_restaurants.dart';
 

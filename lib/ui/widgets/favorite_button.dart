@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:randomized_restaurant/data/repositories/favorites_repository.dart';
+import 'package:sweep_steaks/data/repositories/favorites_repository.dart';
 
 /// A button that adds a restaurant to the user's favorites list
 class FavoriteButton extends ConsumerWidget {
